@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>رفيق RFEG · نمو العقارية</title>
+<style>
+@font-face{font-family:"BW";font-weight:300;src:url(fonts/BW-300.woff2) format("woff2")}
+@font-face{font-family:"BW";font-weight:400;src:url(fonts/BW-400.woff2) format("woff2")}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{font:15px/1.8 "BW",Tahoma,sans-serif;color:#EEF0EE;background:#0B1A21 linear-gradient(180deg,#0A1820 0%,#10242C 30%,#1C343D 62%,#30484F 84%,#5E6560 95%,#8A7D66 100%) fixed;display:grid;place-items:center;padding:24px;-webkit-font-smoothing:antialiased}
+.g{width:min(440px,100%);display:grid;gap:26px;justify-items:center;text-align:center;animation:rise 1.2s cubic-bezier(.25,.6,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+.sym{width:min(360px,80%);height:auto;opacity:.95}
+.lock{display:flex;align-items:center;gap:14px;color:#F1F1F1}
+.lock svg{width:44px;height:40px}
+.lock .t{display:grid;text-align:right;line-height:1.15}
+.lock b{font-weight:400;font-size:22px}
+.lock small{font-size:10px;letter-spacing:.24em;color:#93A2A6;direction:ltr;text-align:right}
+p{margin:0;color:#C3CCCE;font-size:13.5px;max-width:34ch}
+form{display:grid;gap:12px;width:100%}
+input{width:100%;background:rgba(241,241,241,.07);border:1px solid rgba(241,241,241,.22);border-radius:999px;padding:13px 18px;font:inherit;color:#F1F1F1;text-align:center;letter-spacing:.12em;direction:ltr;font-size:16px}
+input:focus{outline:0;border-color:#EDE6DB}
+button{all:unset;cursor:pointer;background:#EDE6DB;color:#0B1A21;border-radius:999px;padding:12px 24px;font:inherit;font-size:14px}
+button:disabled{opacity:.5;cursor:default}
+.err{color:#DB9494;font-size:13px;min-height:1.6em}
+.ft{font-size:11.5px;color:#93A2A6}
+</style>
+</head>
+<body>
+<div class="g">
+  <img class="sym" src="sym.png" alt="">
+  <div class="lock"><svg viewBox="0 0 124 112"><path fill="currentColor" fill-rule="evenodd" d="M26 0H124V76L98 112H0V36ZM57 30H81V62L67 82H43V50Z"/></svg><span class="t"><b>رفيق RFEG</b><small>NMO REAL ESTATE · VALUATION</small></span></div>
+  <p>منصة نمو العقارية للتقييم العقاري والإيجاري. أدخل رمز الدخول لفك تشفير المنصة على جهازك.</p>
+  <form id="f"><input id="code" placeholder="رمز الدخول" autocomplete="current-password" type="password" required><button id="go">دخول</button><div class="err" id="err"></div></form>
+  <div class="ft">محتوى المنصة مشفّر على الخادم ولا يُفك إلا بالرمز · نمو العقارية © 2026</div>
+</div>
+<script>
+const enc = new TextEncoder(), dec = new TextDecoder();
+const b64 = {to: u8 => btoa(String.fromCharCode(...u8)), from: s => Uint8Array.from(atob(s), c => c.charCodeAt(0))};
+async function deriveKey(code, salt) {
+  const base = await crypto.subtle.importKey('raw', enc.encode(code.trim().toUpperCase()), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({name: 'PBKDF2', salt, iterations: 600000, hash: 'SHA-256'}, base, {name: 'AES-GCM', length: 256}, true, ['decrypt']);
+}
+async function decryptBuf(key, buf) {
+  const u = new Uint8Array(buf); const iv = u.slice(16, 28), ct = u.slice(28);
+  return crypto.subtle.decrypt({name: 'AES-GCM', iv}, key, ct);
+}
+async function fetchEnc(name) { const r = await fetch(name + '?v=' + Date.now(), {cache: 'no-store'}); if (!r.ok) throw new Error('fetch'); return r.arrayBuffer(); }
+let KEY = null;
+window.RFEG_DECRYPT_FILE = async (name, mime) => { const pt = await decryptBuf(KEY, await fetchEnc(name)); return new Blob([pt], {type: mime}); };
+async function boot(key) {
+  KEY = key;
+  const [app, data, img] = await Promise.all([fetchEnc('app.enc'), fetchEnc('data.enc'), fetchEnc('img.enc')]);
+  const html = dec.decode(await decryptBuf(key, app));
+  window.RFEG_DATA = JSON.parse(dec.decode(await decryptBuf(key, data)));
+  const im = JSON.parse(dec.decode(await decryptBuf(key, img))); const IMG = {};
+  for (const k in im) IMG[k] = URL.createObjectURL(new Blob([b64.from(im[k])], {type: 'image/jpeg'}));
+  window.RFEG_IMG = IMG;
+  document.open(); document.write(html); document.close();
+}
+async function tryCode(code) {
+  const hdr = new Uint8Array(await fetchEnc('app.enc')).slice(0, 16);
+  const key = await deriveKey(code, hdr);
+  await decryptBuf(key, await fetchEnc('app.enc')); // يفشل إن كان الرمز خطأ
+  try { sessionStorage.setItem('rfeg.key', b64.to(new Uint8Array(await crypto.subtle.exportKey('raw', key)))); } catch (e) {}
+  return key;
+}
+document.getElementById('f').onsubmit = async e => {
+  e.preventDefault(); const b = document.getElementById('go'), er = document.getElementById('err'); b.disabled = true; b.textContent = 'جارٍ التحقق…'; er.textContent = '';
+  try { const key = await tryCode(document.getElementById('code').value); b.textContent = 'جارٍ فك التشفير…'; await boot(key); }
+  catch (err) { er.textContent = 'رمز الدخول غير صحيح'; b.disabled = false; b.textContent = 'دخول'; }
+};
+(async () => { try { const k = sessionStorage.getItem('rfeg.key'); if (k) { const key = await crypto.subtle.importKey('raw', b64.from(k), {name: 'AES-GCM'}, true, ['decrypt']); document.getElementById('go').textContent = 'جارٍ الفتح…'; await boot(key); } } catch (e) { try { sessionStorage.removeItem('rfeg.key'); } catch (x) {} document.getElementById('go').textContent = 'دخول'; } })();
+</script>
+</body>
+</html>
