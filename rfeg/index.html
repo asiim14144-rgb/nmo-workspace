@@ -12,12 +12,13 @@
 body{font:15px/1.8 "BW",Tahoma,sans-serif;color:#EEF0EE;background:#0B1A21 linear-gradient(180deg,#0A1820 0%,#10242C 30%,#1C343D 62%,#30484F 84%,#5E6560 95%,#8A7D66 100%) fixed;display:grid;place-items:center;padding:24px;-webkit-font-smoothing:antialiased}
 .g{width:min(440px,100%);display:grid;gap:26px;justify-items:center;text-align:center;animation:rise 1.2s cubic-bezier(.25,.6,.2,1) both}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}}
-.sym{width:min(360px,80%);height:auto;opacity:.95}
-.lock{display:flex;align-items:center;gap:14px;color:#F1F1F1}
-.lock svg{width:44px;height:40px}
-.lock .t{display:grid;text-align:right;line-height:1.15}
-.lock b{font-weight:400;font-size:22px}
-.lock small{font-size:10px;letter-spacing:.24em;color:#93A2A6;direction:ltr;text-align:right}
+.lock{display:flex;align-items:center;gap:16px;color:#F1F1F1;margin-top:10px}
+.lock svg{width:56px;height:51px;flex:none}
+.lock .t{display:grid;text-align:right;gap:6px}
+.lock b{font-weight:400;font-size:30px;line-height:1.1;display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.lock b i{font-style:normal;font-size:22px;letter-spacing:.08em;direction:ltr}
+.lock small{font-size:9.5px;letter-spacing:.26em;color:#93A2A6;direction:ltr;text-align:right;line-height:1.4}
+.tag{font-size:12px;color:#93A2A6;letter-spacing:.04em}
 p{margin:0;color:#C3CCCE;font-size:13.5px;max-width:34ch}
 form{display:grid;gap:12px;width:100%}
 input{width:100%;background:rgba(241,241,241,.07);border:1px solid rgba(241,241,241,.22);border-radius:999px;padding:13px 18px;font:inherit;color:#F1F1F1;text-align:center;letter-spacing:.12em;direction:ltr;font-size:16px}
@@ -30,8 +31,8 @@ button:disabled{opacity:.5;cursor:default}
 </head>
 <body>
 <div class="g">
-  <img class="sym" src="sym.png" alt="">
-  <div class="lock"><svg viewBox="0 0 124 112"><path fill="currentColor" fill-rule="evenodd" d="M26 0H124V76L98 112H0V36ZM57 30H81V62L67 82H43V50Z"/></svg><span class="t"><b>رفيق RFEG</b><small>NMO REAL ESTATE · VALUATION</small></span></div>
+  <div class="lock"><svg viewBox="0 0 124 112"><path fill="currentColor" fill-rule="evenodd" d="M26 0H124V76L98 112H0V36ZM57 30H81V62L67 82H43V50Z"/></svg><span class="t"><b>رفيق <i>RFEG</i></b><small>NMO REAL ESTATE · VALUATION</small></span></div>
+  <div class="tag">منصة التقييم العقاري والإيجاري · منتج تابع لشركة نمو العقارية</div>
   <p>منصة نمو العقارية للتقييم العقاري والإيجاري. أدخل رمز الدخول لفك تشفير المنصة على جهازك.</p>
   <form id="f"><input id="code" placeholder="رمز الدخول" autocomplete="current-password" type="password" required><button id="go">دخول</button><div class="err" id="err"></div></form>
   <div class="ft">محتوى المنصة مشفّر على الخادم ولا يُفك إلا بالرمز · نمو العقارية © 2026</div>
