@@ -595,8 +595,8 @@ function setPath(p, v) { const ks = p.split('.'); let o = S; for (let i = 0; i <
 /* ---------- control builders ---------- */
 const YN = [['yes', 'نعم'], ['no', 'لا']];
 const FULL = () => S.full && S.screen === 'form';
-const on = c => c || FULL();
-const W = t => FULL() ? `<p class="when">${t}</p>` : '';
+const on = c => !!c;
+const W = () => '';
 function seg(path, opts, cur, cls) { return `<div class="seg ${cls || ''}" role="radiogroup">${opts.map(([v, l]) => `<button type="button" role="radio" aria-checked="${cur === v}" data-set="${path}" data-val="${v}">${l}</button>`).join('')}</div>`; }
 function chips(path, opts, arr) { return `<div class="chips">${opts.map(o => { const v = Array.isArray(o) ? o[0] : o, l = Array.isArray(o) ? o[1] : o; return `<button type="button" class="chip" aria-pressed="${arr.includes(v)}" data-toggle="${path}" data-val="${esc(v)}">${l}</button>`; }).join('')}</div>`; }
 function chipsOne(path, opts, cur) { return `<div class="chips" role="radiogroup">${opts.map(v => `<button type="button" class="chip" role="radio" aria-checked="${cur === v}" data-set="${path}" data-val="${esc(v)}">${v}</button>`).join('')}</div>`; }
@@ -605,7 +605,7 @@ function units(path, txtPath, cntPath, arr, P, label) {
   if (N.hasUnits(P)) return `<div><span class="lbl">${label} <small>اضغط على الوحدات، والعدد يُحسب تلقائياً</small></span><div class="units">${P.unitList.map(u => `<button type="button" class="chip" aria-pressed="${arr.includes(u)}" data-toggle="${path}" data-val="${u}">${u}</button>`).join('')}</div><div class="ucount">المحدد: <b class="num">${arr.length}</b>${arr.length ? ' · ' + arr.join('، ') : ''}</div></div>`;
   return (cntPath ? `<div class="row2">${field(cntPath, 'العدد', getPath(cntPath) || '', { num: true, ph: '0', max: 4 })}${field(txtPath, 'أرقام الوحدات', getPath(txtPath) || '', { ph: 'مثال: 3، 7، 12', max: 200 })}</div>` : field(txtPath, label, getPath(txtPath) || '', { ph: 'مثال: 3، 7، 12', max: 200 }));
 }
-function Q(n, id, title, help, ctl, sub, when) { return `<section class="q${showMissing && missingIds().has(id) ? ' miss' : ''}" id="q-${id}"><div class="q-h">${n !== '' ? `<span class="q-n">${n}</span>` : ''}<h3 class="q-t">${title}</h3></div>${help ? `<p class="help">${help}</p>` : ''}<div class="ctl">${ctl}</div>${sub ? `<div class="sub">${FULL() && when ? `<p class="when">${when}</p>` : ''}${sub}</div>` : ''}</section>`; }
+function Q(n, id, title, help, ctl, sub, when) { return `<section class="q${showMissing && missingIds().has(id) ? ' miss' : ''}" id="q-${id}"><div class="q-h">${n !== '' ? `<span class="q-n">${n}</span>` : ''}<h3 class="q-t">${title}</h3></div>${help ? `<p class="help">${help}</p>` : ''}<div class="ctl">${ctl}</div>${sub ? `<div class="sub">${sub}</div>` : ''}</section>`; }
 
 /* ---------- sections ---------- */
 function secStart() {
@@ -638,7 +638,7 @@ function sec0() {
   if (on(A.dataOk === 'no')) {
     s1 = `<div><span class="lbl">ما البيانات غير الصحيحة؟</span>${chips('A.dataFixKeys', fields.map(f => [f.k, f.label]), A.dataFixKeys)}</div>` +
       A.dataFixKeys.map(k => { const F = N.FIELDS.find(f => f.k === k); return F ? field('A.dataFix.' + k, `${F.label} الصحيح <span class="cur">· المسجل: ${esc(N.fieldVal(P, k))}</span>`, A.dataFix[k] || '', { num: F.num, max: 80 }) : ''; }).join('') +
-      (A.dataFixKeys.length ? '' : (FULL() ? '<p class="note">يظهر حقل للقيمة الصحيحة لكل بند تختاره.</p>' : ''));
+      (A.dataFixKeys.length ? '' : '<p class="note">اختر البند، فيظهر حقل لكتابة قيمته الصحيحة.</p>');
   }
   let s2 = '';
   if (on(A.mapOk === 'no')) s2 = field('A.mapUrl', 'رابط الموقع الصحيح', A.mapUrl, { ltr: true, ph: 'https://maps.google.com/…', max: 300 }) + `<div class="up"><button type="button" class="btn ghost" data-act="geo">استخدم موقعي الحالي</button><span class="note" id="geoMsg">إن كنت أمام العقار الآن</span></div>`;
@@ -654,11 +654,11 @@ function sec1() {
     if (on(A.waqfBenef === 'yes')) s3 += `<div>${W('عند تخصيص الريع')}<span class="lbl">المصرف أو الفئة</span>${chipsOne('A.waqfBenefType', N.WAQF_BENEF, A.waqfBenefType)}</div>` + (on(A.waqfBenefType === 'أخرى') ? field('A.waqfBenefOther', 'حدد المصرف', A.waqfBenefOther, { max: 80 }) : '');
   }
   if (on(A.waqf === 'unknown')) s3 += W('عند «لا أعلم»') + '<p class="note">لا بأس. سيُحال للتحقق، ولا يلزمك شيء آخر هنا.</p>';
-  const list = FULL() ? N.DOCS : N.visibleDocs(A);
+  const list = N.visibleDocs(A);
   const docs = list.map(d => {
     const x = A.docs[d.k] || {};
     const opts = d.lease ? [['ejar', 'كلها في إيجار'], ['partial', 'بعضها خارجه'], ['none', 'لا توجد']] : (d.noNA ? [['av', 'متوفر'], ['no', 'غير متوفر']] : [['av', 'متوفر'], ['no', 'غير متوفر'], ['na', 'لا ينطبق']]);
-    const hint = d.k === 'waqfDeed' && FULL() ? 'يظهر إذا كان العقار وقفاً' : d.hint;
+    const hint = d.hint;
     return `<div class="doc"><div class="doc-n">${d.name}${hint ? `<small>${hint}</small>` : ''}</div>${seg('A.docs.' + d.k + '.st', opts, x.st, 'sm')}</div>`;
   }).join('');
   return Q(3, 'waqf', 'هل العقار وقف؟', '', seg('A.waqf', [['yes', 'نعم'], ['no', 'لا'], ['unknown', 'لا أعلم']], A.waqf), s3) +
