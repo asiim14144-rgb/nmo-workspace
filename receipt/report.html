@@ -303,11 +303,29 @@ main.r-in{padding-block:6px 60px}
 .teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 34px}
 .team h4{margin:12px 0 2px;font-size:13.5px;font-weight:500;color:var(--mute)}
 .r-foot{font-size:12.5px;color:var(--faint);margin-top:30px;line-height:1.8}
+.send-row{display:flex;flex-wrap:wrap;gap:8px}
+.send-row .btn-link,.send-row .btn{flex:1 1 140px;min-height:48px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:14.5px}
+.edit-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 20px;background:var(--acc-soft);color:var(--acc);font-size:13px;flex-wrap:wrap}
+.edits{display:grid;margin:0;padding:0;list-style:none}
+.edits li{padding:9px 0;border-bottom:1px solid var(--line-2);font-size:14px;line-height:1.7}
+.edits li b{font-weight:500}
+.edits .f{color:var(--mute);text-decoration:line-through;text-decoration-color:rgba(227,156,147,.7)}
+.edits .t{color:var(--acc)}
+.panel{margin-top:10px;padding:22px;border-radius:20px;background:var(--panel);border:1px solid var(--line);display:grid;gap:18px}
+.panel h3{margin:0;font-family:var(--fd);font-weight:300;font-size:22px}
+.panel .who{font-size:13.5px;color:var(--mute)}
+.chain li.back .dot{border-color:var(--bad);color:var(--bad)}
+.chain .note-q{display:block;margin-top:4px;color:var(--ink-2);font-size:13.5px;background:var(--veil);border-radius:10px;padding:6px 10px}
+.panel .note-q{display:block;color:var(--ink-2);font-size:14px;background:var(--veil);border-radius:12px;padding:10px 14px;line-height:1.7}
+.panel .btn-link.ghost{justify-self:start}
+.panel .btn.pri{flex:none;width:100%}
+.panel .seg{max-width:420px}
+@media (max-width:520px){.panel{padding:18px}.panel .btn-link.ghost{justify-self:stretch}}
 </style>
 </head>
 <body>
 <div id="app"></div>
-<script>window.NMO_LOGO="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 6 622 102\" role=\"img\" aria-label=\"نمو العقارية\"><g fill=\"currentColor\"><path d=\"M349.8 40.2V44.1H343.8Q343.4 47.5 341.9 49.5Q340.4 51.4 337.5 52.2Q334.6 53.1 329.6 53.1Q327.3 53.1 324.3 52.7Q321.3 52.2 318.5 51.6L317.7 47.4Q324.2 49.1 329.5 49.1Q333.3 49.1 335.5 48.7Q337.7 48.2 338.7 47.1Q339.7 46.1 339.9 44.1H330.2Q323.6 44.1 320 41.3Q316.4 38.4 316.4 33V33Q316.4 29.6 317.9 27.1Q319.5 24.5 322.4 23.2Q325.3 21.8 329.3 21.8H343.6H343.9V40.2ZM339.9 40.2V25.7H328.5Q324.6 25.7 322.3 27.6Q320.1 29.6 320.1 33V33Q320.1 36.4 322.4 38.3Q324.6 40.2 328.5 40.2Z M357.4 44.1H349V40.2H357.4Z M365.1 44.1H356.6V40.2H365.1Z M372.7 44.1H364.3V40.2H372.7Z M380.3 44.1H371.9V40.2H380.3Z M388 44.1H379.5V40.2H388Z M395.6 44.1H387.2V40.2H395.6Z M403.2 44.1H394.8V40.2H403.2Z M410.9 44.1H402.4V40.2H410.9Z M418.5 44.1H410.1V40.2H418.5Z M426.1 44.1H417.7V40.2H426.1Z M433.8 44.1H425.3V40.2H433.8Z M472.4 40.2V44.1H464.9Q463.2 46.2 460.5 47.4Q457.8 48.5 454.4 48.5H450.4Q446.9 48.5 444.2 47.4Q441.4 46.2 439.6 44.1H433V40.2H437.5Q437 38.5 437 36.7V36.7Q437 33 438.7 30.3Q440.4 27.5 443.4 26Q446.4 24.5 450.4 24.5H454.4Q458.3 24.5 461.3 26Q464.2 27.5 465.8 30.3Q467.5 33 467.5 36.6V36.7Q467.5 38.5 467 40.2ZM463.5 36.5Q463.5 34.1 462.4 32.3Q461.2 30.5 459.2 29.5Q457.1 28.5 454.4 28.5H450.4Q447.6 28.5 445.5 29.5Q443.3 30.5 442.2 32.3Q441 34.2 441 36.6V36.6Q441 39 442.2 40.8Q443.3 42.6 445.5 43.6Q447.6 44.6 450.4 44.6H454.4Q457.1 44.6 459.2 43.6Q461.2 42.6 462.4 40.8Q463.5 38.9 463.5 36.6Z M480.9 44.1H471.6V40.2H476.9V21.8H480.9ZM476.6 14.4Q476.6 13.4 477.3 12.8Q478 12.1 479 12.1Q480 12.1 480.7 12.8Q481.3 13.4 481.3 14.4Q481.3 15.4 480.7 16Q480 16.6 479 16.6Q478 16.6 477.3 16Q476.6 15.4 476.6 14.4Z M36.2 41.4V44.1H27.1H16.2Q9.9 44.1 6.5 41.3Q3 38.4 3 33.2V33.2Q3 29.8 4.5 27.3Q6.1 24.8 8.9 23.5Q11.7 22.1 15.6 22.1H27.1V20.1H29.9V41.4ZM27.1 24.9H15.1Q10.7 24.9 8.2 27.1Q5.7 29.3 5.7 33.2V33.2Q5.7 37.1 8.2 39.2Q10.7 41.4 15.1 41.4H27.1ZM14.7 14.4Q14.7 13.7 15.3 13.1Q15.8 12.6 16.6 12.6Q17.4 12.6 17.9 13.1Q18.4 13.7 18.4 14.4Q18.4 15.2 17.9 15.7Q17.4 16.2 16.6 16.2Q15.8 16.2 15.3 15.7Q14.7 15.2 14.7 14.4ZM21.6 14.4Q21.6 13.7 22.1 13.1Q22.7 12.6 23.4 12.6Q24.2 12.6 24.7 13.1Q25.3 13.7 25.3 14.4Q25.3 15.2 24.7 15.7Q24.2 16.2 23.4 16.2Q22.7 16.2 22.1 15.7Q21.6 15.2 21.6 14.4Z M47.1 44.1H35.4V41.4H44.3V22.1H47.1ZM35.9 51.3Q35.9 50.6 36.5 50Q37 49.5 37.8 49.5Q38.5 49.5 39.1 50Q39.6 50.6 39.6 51.3Q39.6 52.1 39.1 52.6Q38.5 53.1 37.8 53.1Q37 53.1 36.5 52.6Q35.9 52.1 35.9 51.3ZM42.8 51.3Q42.8 50.6 43.3 50Q43.8 49.5 44.6 49.5Q45.4 49.5 45.9 50Q46.5 50.6 46.5 51.3Q46.5 52.1 45.9 52.6Q45.4 53.1 44.6 53.1Q43.8 53.1 43.3 52.6Q42.8 52.1 42.8 51.3Z M51 52.4 50.8 50.1Q53.4 50.4 55.3 50.4Q58.8 50.4 60.4 48.5Q62.1 46.5 62.1 42.4V22.1H64.9V42.4Q64.9 47.8 62.6 50.4Q60.4 53 55.8 53Q53.3 53 51 52.4Z M75.6 11.5V41.4H81.9V44.1H72.8V11.5Z M89.9 44.1H81.1V41.4H89.9Z M98 44.1H89.1V41.4H98Z M106 44.1H97.2V41.4H106Z M114 44.1H105.2V41.4H114Z M122.1 44.1H113.2V41.4H122.1Z M130.1 44.1H121.3V41.4H130.1Z M138.2 44.1H129.3V41.4H138.2Z M146.2 44.1H137.4V41.4H146.2Z M154.2 44.1H145.4V41.4H154.2Z M162.3 44.1H153.4V41.4H162.3Z M170.3 44.1H161.5V41.4H170.3Z M178.3 44.1H169.5V41.4H178.3Z M186.4 44.1H177.5V41.4H186.4Z M194.4 44.1H185.6V41.4H194.4Z M202.5 44.1H193.6V41.4H202.5Z M232.7 41.4H239V44.1H232.4H232.3H219.1H201.7V41.4H209.4Q207.6 40 206.7 37.9Q205.8 35.9 205.8 33.2V33.2Q205.8 29.8 207.4 27.3Q208.9 24.8 211.7 23.5Q214.6 22.1 218.4 22.1H232.7ZM229.9 41.4V24.9H218Q213.5 24.9 211 27.1Q208.5 29.3 208.5 33.2V33.2Q208.5 37.1 211 39.2Q213.5 41.4 218 41.4ZM216.9 14.9Q216.9 14.2 217.4 13.6Q218 13.1 218.7 13.1Q219.5 13.1 220 13.6Q220.6 14.2 220.6 14.9Q220.6 15.7 220 16.2Q219.5 16.7 218.7 16.7Q218 16.7 217.4 16.2Q216.9 15.7 216.9 14.9ZM223.7 14.9Q223.7 14.2 224.3 13.6Q224.8 13.1 225.6 13.1Q226.3 13.1 226.9 13.6Q227.4 14.2 227.4 14.9Q227.4 15.7 226.9 16.2Q226.3 16.7 225.6 16.7Q224.8 16.7 224.3 16.2Q223.7 15.7 223.7 14.9Z M267.8 41.4H278.1V44.1H238.2V41.4H247.7L241.4 26.2Q245.5 24 249.7 22.9Q253.9 21.7 257.8 21.7Q261.5 21.7 265.7 22.9Q269.8 24 274 26.3ZM250.4 41.4H264.9L270.8 27.8Q263.9 24.5 257.8 24.5Q251.6 24.5 244.7 27.8Z M282.7 41.4V11.5H285.5V44.1H277.3V41.4Z M297.1 44.1H294.3V11.5H297.1Z M32.5 96.9V67.3H36.6V100.8H30.4L6.6 70.7V100.8H2.5V67.3H8.9Z M63.3 97.4 77.8 67.3H84.9V100.8H80.8V70.2L65.9 100.8H60.6L45.7 70.2V100.8H41.6V67.3H48.7Z M89.2 84.1V84Q89.2 78.9 91.7 75Q94.2 71 98.8 68.9Q103.4 66.7 109.5 66.7Q115.7 66.7 120.2 68.9Q124.8 71 127.3 75Q129.8 78.9 129.8 84V84.1Q129.8 89.2 127.3 93.1Q124.8 97 120.2 99.2Q115.7 101.3 109.5 101.3Q103.4 101.3 98.8 99.2Q94.2 97 91.7 93.1Q89.2 89.2 89.2 84.1ZM125.7 84.1V84Q125.7 80 123.7 76.9Q121.7 73.9 118 72.2Q114.4 70.6 109.5 70.6Q104.6 70.6 101 72.2Q97.3 73.9 95.4 76.9Q93.4 79.9 93.4 84V84.1Q93.4 88.1 95.4 91.1Q97.4 94.2 101 95.8Q104.7 97.5 109.5 97.5Q114.4 97.5 118 95.8Q121.7 94.2 123.7 91.1Q125.7 88.1 125.7 84.1Z M177.7 100.8H174.4L164.9 87H164.1H147V100.8H144.2V67.3H164.1Q169.5 67.3 172.6 69.8Q175.8 72.4 175.8 76.9V77Q175.8 80.7 173.7 83.2Q171.6 85.7 167.9 86.6ZM163.9 84.3Q168 84.3 170.4 82.4Q172.8 80.4 172.8 77V77Q172.8 73.5 170.4 71.8Q168 70 163.9 70H147V84.3Z M209.8 100.8H181.6V67.3H209.6V70H184.4V82.1H208V84.8H184.4V98.1H209.8Z M250.5 100.8H247.4L241.7 89.9H220.9L215.2 100.8H212.2L229.6 67.3H232.9ZM240.5 87.4 231.3 69.8 222.1 87.4Z M282.1 100.8H253.9V67.3H256.7V98.1H282.1Z M323.6 100.8H295.4V67.3H323.5V70H298.3V82.1H321.8V84.8H298.3V98.1H323.6Z M326.7 98.1 328.1 95.7Q331.1 97.3 334.3 98Q337.5 98.6 341.1 98.6Q346.9 98.6 350.3 97Q353.8 95.4 353.8 92.3V92.2Q353.8 90.2 352.4 88.9Q351 87.5 348.4 86.6Q345.7 85.6 341.2 84.7Q336.6 83.8 333.6 82.6Q330.6 81.5 329 79.7Q327.5 77.9 327.5 75.2V75.1Q327.5 72.5 329.1 70.7Q330.8 68.8 333.9 67.8Q337 66.8 341.3 66.8Q345.3 66.8 349.2 67.6Q353 68.4 355.4 69.8L354 72.1Q351.9 70.9 348.4 70.2Q344.8 69.4 341.3 69.4Q336.2 69.4 333.3 70.9Q330.4 72.4 330.4 74.9V75Q330.4 76.7 331.5 77.9Q332.6 79.1 335.1 80Q337.7 81 342.2 81.9Q347.8 83 350.9 84.4Q354 85.8 355.4 87.7Q356.7 89.5 356.7 92.1V92.2Q356.7 96.6 352.6 99Q348.5 101.3 341.2 101.3Q332.8 101.3 326.7 98.1Z M376.8 100.8H373.9V70H358.4V67.3H392.2V70H376.8Z M423.8 100.8H420.8L415.1 89.9H394.2L388.6 100.8H385.6L402.9 67.3H406.3ZM413.8 87.4 404.6 69.8 395.5 87.4Z M435.5 100.8H432.6V70H417.1V67.3H451V70H435.5Z M482.7 100.8H454.4V67.3H482.5V70H457.3V82.1H480.9V84.8H457.3V98.1H482.7Z\"/><path fill-rule=\"evenodd\" transform=\"translate(522,12) scale(0.80357) translate(-421,-131)\" d=\"M447,131 L545,131 L545,207 L519,243 L421,243 L421,167 Z M478,161 L502,161 L502,193 L488,213 L464,213 L464,181 Z\"/></g></svg>";</script>
+<script>window.NMO_LOGO="<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 6 622 102\" role=\"img\" aria-label=\"نمو العقارية\"><g fill=\"currentColor\"><path d=\"M349.8 40.2V44.1H343.8Q343.4 47.5 341.9 49.5Q340.4 51.4 337.5 52.2Q334.6 53.1 329.6 53.1Q327.3 53.1 324.3 52.7Q321.3 52.2 318.5 51.6L317.7 47.4Q324.2 49.1 329.5 49.1Q333.3 49.1 335.5 48.7Q337.7 48.2 338.7 47.1Q339.7 46.1 339.9 44.1H330.2Q323.6 44.1 320 41.3Q316.4 38.4 316.4 33V33Q316.4 29.6 317.9 27.1Q319.5 24.5 322.4 23.2Q325.3 21.8 329.3 21.8H343.6H343.9V40.2ZM339.9 40.2V25.7H328.5Q324.6 25.7 322.3 27.6Q320.1 29.6 320.1 33V33Q320.1 36.4 322.4 38.3Q324.6 40.2 328.5 40.2Z M357.4 44.1H349V40.2H357.4Z M365.1 44.1H356.6V40.2H365.1Z M372.7 44.1H364.3V40.2H372.7Z M380.3 44.1H371.9V40.2H380.3Z M388 44.1H379.5V40.2H388Z M395.6 44.1H387.2V40.2H395.6Z M403.2 44.1H394.8V40.2H403.2Z M410.9 44.1H402.4V40.2H410.9Z M418.5 44.1H410.1V40.2H418.5Z M426.1 44.1H417.7V40.2H426.1Z M433.8 44.1H425.3V40.2H433.8Z M472.4 40.2V44.1H464.9Q463.2 46.2 460.5 47.4Q457.8 48.5 454.4 48.5H450.4Q446.9 48.5 444.2 47.4Q441.4 46.2 439.6 44.1H433V40.2H437.5Q437 38.5 437 36.7V36.7Q437 33 438.7 30.3Q440.4 27.5 443.4 26Q446.4 24.5 450.4 24.5H454.4Q458.3 24.5 461.3 26Q464.2 27.5 465.8 30.3Q467.5 33 467.5 36.6V36.7Q467.5 38.5 467 40.2ZM463.5 36.5Q463.5 34.1 462.4 32.3Q461.2 30.5 459.2 29.5Q457.1 28.5 454.4 28.5H450.4Q447.6 28.5 445.5 29.5Q443.3 30.5 442.2 32.3Q441 34.2 441 36.6V36.6Q441 39 442.2 40.8Q443.3 42.6 445.5 43.6Q447.6 44.6 450.4 44.6H454.4Q457.1 44.6 459.2 43.6Q461.2 42.6 462.4 40.8Q463.5 38.9 463.5 36.6Z M480.9 44.1H471.6V40.2H476.9V21.8H480.9ZM476.6 14.4Q476.6 13.4 477.3 12.8Q478 12.1 479 12.1Q480 12.1 480.7 12.8Q481.3 13.4 481.3 14.4Q481.3 15.4 480.7 16Q480 16.6 479 16.6Q478 16.6 477.3 16Q476.6 15.4 476.6 14.4Z M36.2 41.4V44.1H27.1H16.2Q9.9 44.1 6.5 41.3Q3 38.4 3 33.2V33.2Q3 29.8 4.5 27.3Q6.1 24.8 8.9 23.5Q11.7 22.1 15.6 22.1H27.1V20.1H29.9V41.4ZM27.1 24.9H15.1Q10.7 24.9 8.2 27.1Q5.7 29.3 5.7 33.2V33.2Q5.7 37.1 8.2 39.2Q10.7 41.4 15.1 41.4H27.1ZM14.7 14.4Q14.7 13.7 15.3 13.1Q15.8 12.6 16.6 12.6Q17.4 12.6 17.9 13.1Q18.4 13.7 18.4 14.4Q18.4 15.2 17.9 15.7Q17.4 16.2 16.6 16.2Q15.8 16.2 15.3 15.7Q14.7 15.2 14.7 14.4ZM21.6 14.4Q21.6 13.7 22.1 13.1Q22.7 12.6 23.4 12.6Q24.2 12.6 24.7 13.1Q25.3 13.7 25.3 14.4Q25.3 15.2 24.7 15.7Q24.2 16.2 23.4 16.2Q22.7 16.2 22.1 15.7Q21.6 15.2 21.6 14.4Z M47.1 44.1H35.4V41.4H44.3V22.1H47.1ZM35.9 51.3Q35.9 50.6 36.5 50Q37 49.5 37.8 49.5Q38.5 49.5 39.1 50Q39.6 50.6 39.6 51.3Q39.6 52.1 39.1 52.6Q38.5 53.1 37.8 53.1Q37 53.1 36.5 52.6Q35.9 52.1 35.9 51.3ZM42.8 51.3Q42.8 50.6 43.3 50Q43.8 49.5 44.6 49.5Q45.4 49.5 45.9 50Q46.5 50.6 46.5 51.3Q46.5 52.1 45.9 52.6Q45.4 53.1 44.6 53.1Q43.8 53.1 43.3 52.6Q42.8 52.1 42.8 51.3Z M51 52.4 50.8 50.1Q53.4 50.4 55.3 50.4Q58.8 50.4 60.4 48.5Q62.1 46.5 62.1 42.4V22.1H64.9V42.4Q64.9 47.8 62.6 50.4Q60.4 53 55.8 53Q53.3 53 51 52.4Z M75.6 11.5V41.4H81.9V44.1H72.8V11.5Z M89.9 44.1H81.1V41.4H89.9Z M98 44.1H89.1V41.4H98Z M106 44.1H97.2V41.4H106Z M114 44.1H105.2V41.4H114Z M122.1 44.1H113.2V41.4H122.1Z M130.1 44.1H121.3V41.4H130.1Z M138.2 44.1H129.3V41.4H138.2Z M146.2 44.1H137.4V41.4H146.2Z M154.2 44.1H145.4V41.4H154.2Z M162.3 44.1H153.4V41.4H162.3Z M170.3 44.1H161.5V41.4H170.3Z M178.3 44.1H169.5V41.4H178.3Z M186.4 44.1H177.5V41.4H186.4Z M194.4 44.1H185.6V41.4H194.4Z M202.5 44.1H193.6V41.4H202.5Z M232.7 41.4H239V44.1H232.4H232.3H219.1H201.7V41.4H209.4Q207.6 40 206.7 37.9Q205.8 35.9 205.8 33.2V33.2Q205.8 29.8 207.4 27.3Q208.9 24.8 211.7 23.5Q214.6 22.1 218.4 22.1H232.7ZM229.9 41.4V24.9H218Q213.5 24.9 211 27.1Q208.5 29.3 208.5 33.2V33.2Q208.5 37.1 211 39.2Q213.5 41.4 218 41.4ZM216.9 14.9Q216.9 14.2 217.4 13.6Q218 13.1 218.7 13.1Q219.5 13.1 220 13.6Q220.6 14.2 220.6 14.9Q220.6 15.7 220 16.2Q219.5 16.7 218.7 16.7Q218 16.7 217.4 16.2Q216.9 15.7 216.9 14.9ZM223.7 14.9Q223.7 14.2 224.3 13.6Q224.8 13.1 225.6 13.1Q226.3 13.1 226.9 13.6Q227.4 14.2 227.4 14.9Q227.4 15.7 226.9 16.2Q226.3 16.7 225.6 16.7Q224.8 16.7 224.3 16.2Q223.7 15.7 223.7 14.9Z M267.8 41.4H278.1V44.1H238.2V41.4H247.7L241.4 26.2Q245.5 24 249.7 22.9Q253.9 21.7 257.8 21.7Q261.5 21.7 265.7 22.9Q269.8 24 274 26.3ZM250.4 41.4H264.9L270.8 27.8Q263.9 24.5 257.8 24.5Q251.6 24.5 244.7 27.8Z M282.7 41.4V11.5H285.5V44.1H277.3V41.4Z M297.1 44.1H294.3V11.5H297.1Z M32.5 96.9V67.3H36.6V100.8H30.4L6.6 70.7V100.8H2.5V67.3H8.9Z M63.3 97.4 77.8 67.3H84.9V100.8H80.8V70.2L65.9 100.8H60.6L45.7 70.2V100.8H41.6V67.3H48.7Z M89.2 84.1V84Q89.2 78.9 91.7 75Q94.2 71 98.8 68.9Q103.4 66.7 109.5 66.7Q115.7 66.7 120.2 68.9Q124.8 71 127.3 75Q129.8 78.9 129.8 84V84.1Q129.8 89.2 127.3 93.1Q124.8 97 120.2 99.2Q115.7 101.3 109.5 101.3Q103.4 101.3 98.8 99.2Q94.2 97 91.7 93.1Q89.2 89.2 89.2 84.1ZM125.7 84.1V84Q125.7 80 123.7 76.9Q121.7 73.9 118 72.2Q114.4 70.6 109.5 70.6Q104.6 70.6 101 72.2Q97.3 73.9 95.4 76.9Q93.4 79.9 93.4 84V84.1Q93.4 88.1 95.4 91.1Q97.4 94.2 101 95.8Q104.7 97.5 109.5 97.5Q114.4 97.5 118 95.8Q121.7 94.2 123.7 91.1Q125.7 88.1 125.7 84.1Z M177.7 100.8H174.4L164.9 87H164.1H147V100.8H144.2V67.3H164.1Q169.5 67.3 172.6 69.8Q175.8 72.4 175.8 76.9V77Q175.8 80.7 173.7 83.2Q171.6 85.7 167.9 86.6ZM163.9 84.3Q168 84.3 170.4 82.4Q172.8 80.4 172.8 77V77Q172.8 73.5 170.4 71.8Q168 70 163.9 70H147V84.3Z M209.8 100.8H181.6V67.3H209.6V70H184.4V82.1H208V84.8H184.4V98.1H209.8Z M250.5 100.8H247.4L241.7 89.9H220.9L215.2 100.8H212.2L229.6 67.3H232.9ZM240.5 87.4 231.3 69.8 222.1 87.4Z M282.1 100.8H253.9V67.3H256.7V98.1H282.1Z M323.6 100.8H295.4V67.3H323.5V70H298.3V82.1H321.8V84.8H298.3V98.1H323.6Z M326.7 98.1 328.1 95.7Q331.1 97.3 334.3 98Q337.5 98.6 341.1 98.6Q346.9 98.6 350.3 97Q353.8 95.4 353.8 92.3V92.2Q353.8 90.2 352.4 88.9Q351 87.5 348.4 86.6Q345.7 85.6 341.2 84.7Q336.6 83.8 333.6 82.6Q330.6 81.5 329 79.7Q327.5 77.9 327.5 75.2V75.1Q327.5 72.5 329.1 70.7Q330.8 68.8 333.9 67.8Q337 66.8 341.3 66.8Q345.3 66.8 349.2 67.6Q353 68.4 355.4 69.8L354 72.1Q351.9 70.9 348.4 70.2Q344.8 69.4 341.3 69.4Q336.2 69.4 333.3 70.9Q330.4 72.4 330.4 74.9V75Q330.4 76.7 331.5 77.9Q332.6 79.1 335.1 80Q337.7 81 342.2 81.9Q347.8 83 350.9 84.4Q354 85.8 355.4 87.7Q356.7 89.5 356.7 92.1V92.2Q356.7 96.6 352.6 99Q348.5 101.3 341.2 101.3Q332.8 101.3 326.7 98.1Z M376.8 100.8H373.9V70H358.4V67.3H392.2V70H376.8Z M423.8 100.8H420.8L415.1 89.9H394.2L388.6 100.8H385.6L402.9 67.3H406.3ZM413.8 87.4 404.6 69.8 395.5 87.4Z M435.5 100.8H432.6V70H417.1V67.3H451V70H435.5Z M482.7 100.8H454.4V67.3H482.5V70H457.3V82.1H480.9V84.8H457.3V98.1H482.7Z\"/><path fill-rule=\"evenodd\" transform=\"translate(522,12) scale(0.80357) translate(-421,-131)\" d=\"M447,131 L545,131 L545,207 L519,243 L421,243 L421,167 Z M478,161 L502,161 L502,193 L488,213 L464,213 L464,181 Z\"/></g></svg>";window.NMO_CFG={"formsBase": "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=", "apprId": "U45g-NyQ_E6hrw7Uq9RLU5jTfIV2tEZCuuoIhau6ZtBURjFZRUkxSjBEOEE2NzdVUUtTRU1QMkZLTy4u", "aqmap": {"ref": "r8e3373296993436f8b865139570e8831", "code": "r9b56a8f3fb584187aa9a65a5a34f2c3e", "name": "r73a64d99a42545b49820377838e556ef", "stage": "r0eca5185d1db40a98de9a7302f664ae3", "approver": "r925537356ebd413eb49b74ce20bb333c", "decision": "ra19d9cb1b93a48dfa2ee3d053793eac6", "note": "rf6a4e3b177694fc7bb4a2a1956664926", "edits": "r4d3c1fdcdc1341cf8e1e45d92ab14fd9", "status": "rba6cdf0c6e104128b2b83647f3f9d4a9", "next": "r81fdb4b6fb4547b0a7d396aea934bba3", "link": "r936a100eb32b4c1faa102101b369ee23"}, "formUrl": "https://asiim14144-rgb.github.io/nmo-workspace/receipt/", "reportUrl": "https://asiim14144-rgb.github.io/nmo-workspace/receipt/report.html"};</script>
 <script>/* NMO property receipt — shared definitions (used by the supervisor page, the approval page and the worker) */
 const NMO = (() => {
   const DOCS = [
@@ -522,6 +540,30 @@ const NMO = (() => {
     ['upl', 'المرفقات', A => A.upl === 'done' ? 'رُفعت' + (num(A.uplCount) ? ` (${num(A.uplCount)} ملفات)` : '') : A.upl === 'later' ? 'لم تُرفع بعد' : '']
   ];
 
+
+  /* ---------- approval chain ---------- */
+  /* chain entries: {s: stage, n: name, d: 'ok' | 'back' | 'resend', note, at, edits: [{l, f, t}]} */
+  function stageOf(chain) { let s = 1; (chain || []).forEach(e => { if (e.d === 'ok') s = e.s + 1; else if (e.d === 'back') s = Math.max(0, e.s - 1); else if (e.d === 'resend') s = 1; }); return s; }
+  const holder = s => s === 0 ? 'مشرف العقار' : s > APPROVERS.length ? '' : APPROVERS[s - 1].name;
+  const chainState = s => s === 0 ? 'معاد إلى المشرف' : s > APPROVERS.length ? 'معتمد نهائياً' : 'بانتظار ' + APPROVERS[s - 1].name;
+  function diffA(A0, A1, P) {
+    const out = [];
+    COLUMNS.forEach(([k, label, fn]) => { if (k === 'upl') return; const f = fn(A0, P) || '', t = fn(A1, P) || ''; if (f !== t) out.push({ l: label, f, t }); });
+    return out;
+  }
+  /* compact transport of a report inside a link: deflate-raw + base64url ("z…"), or plain base64url ("j…") */
+  const _b64 = bytes => { let s = ''; for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); };
+  const _unb64 = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; const bin = atob(s); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
+  async function pack(obj) {
+    const raw = new TextEncoder().encode(JSON.stringify(obj));
+    if (typeof CompressionStream !== 'undefined') { try { const cs = new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw')); return 'z' + _b64(new Uint8Array(await new Response(cs).arrayBuffer())); } catch (e) { } }
+    return 'j' + _b64(raw);
+  }
+  async function unpack(d) {
+    const kind = d[0], bytes = _unb64(d.slice(1));
+    if (kind === 'z') { const ds = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')); return JSON.parse(await new Response(ds).text()); }
+    return JSON.parse(new TextDecoder().decode(bytes));
+  }
   /* Compact readable values for the background Microsoft Form (one Excel column each) */
   const SHORT_DOC = { deed: 'صك الملكية', waqfDeed: 'صك الوقف', permit: 'رخصة البناء', completion: 'إتمام البناء', safety: 'الدفاع المدني', plans: 'المخططات', leases: 'عقود الإيجار', ops: 'عقود التشغيل' };
   function formsFields(R) {
@@ -548,31 +590,114 @@ const NMO = (() => {
     };
   }
 
-  return { DOCS, DOC_ST, UPLOAD_URL, checklist, formsFields, WAQF_BENEF, VAC_REASON, OFF, MNT_LEVEL, MNT_AREAS, METERS, PAYER, VIOL, OPP, SPACE, FIELDS, STEPS, TEAMS, STATUS, APPROVERS, COLUMNS,
+  return { DOCS, DOC_ST, UPLOAD_URL, checklist, formsFields, stageOf, holder, chainState, diffA, pack, unpack, WAQF_BENEF, VAC_REASON, OFF, MNT_LEVEL, MNT_AREAS, METERS, PAYER, VIOL, OPP, SPACE, FIELDS, STEPS, TEAMS, STATUS, APPROVERS, COLUMNS,
     blank, num, fmt, unitsWord, hasUnits, visibleDocs, fieldVal, reqs, progress, analyze, statusOf, vacN, vacList, fileN, yn, lab };
 })();
 if (typeof module !== 'undefined') module.exports = NMO;
+
+/* Small UI helpers shared by the supervisor page and the report/approval page */
+const UI = (() => {
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const ICON_OUT = '<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V14H2V4h4.5"/></svg>';
+  const ICON_MAIL = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 3.5h12v9H2zM2.5 4l5.5 4.5L13.5 4"/></svg>';
+  const ICON_WA = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 13.5l.8-2.6A5.6 5.6 0 1 1 6 13l-3 .5z"/></svg>';
+  const ICON_COPY = '<svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5.5 5.5h8v8h-8zM10.5 5.5v-3h-8v8h3"/></svg>';
+  const intlPhone = p => { const d = String(p || '').replace(/[^\d]/g, ''); if (/^05\d{8}$/.test(d)) return '966' + d.slice(1); if (/^9665\d{8}$/.test(d)) return d; return ''; };
+  /* to: {name, email?, phone?}; text: message body (link appended) */
+  function sendBlock(o) {
+    const body = `${o.text}\n\n${o.link}\n\nشكراً لكم.`;
+    const mail = o.to.email ? `mailto:${o.to.email}?subject=${encodeURIComponent(o.subject)}&body=${encodeURIComponent('السلام عليكم،\n\n' + body)}` : '';
+    const ph = intlPhone(o.to.phone);
+    const wa = `https://wa.me/${ph}?text=${encodeURIComponent('السلام عليكم،\n' + body)}`;
+    return `<div class="upbox fwd"><span class="lbl" style="margin:0">${esc(o.title)}</span>
+      <p class="note">${esc(o.hint || 'أرسل له رابط التقرير بإحدى الطرق التالية:')}</p>
+      <div class="send-row">${mail ? `<a class="btn-link" href="${esc(mail)}">${ICON_MAIL} بريد إلى ${esc(o.to.name)}</a>` : ''}<a class="btn-link ${mail ? 'ghost' : ''}" href="${esc(wa)}" target="_blank" rel="noopener">${ICON_WA} واتساب${ph ? '' : ''}</a><button type="button" class="btn ghost" data-copy="${esc(o.link)}">${ICON_COPY} نسخ الرابط</button></div>
+      ${o.to.email ? `<p class="note">البريد: <span class="ltr">${esc(o.to.email)}</span></p>` : ''}</div>`;
+  }
+  async function copy(text) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) { }
+    try { const t = document.createElement('textarea'); t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); const ok = document.execCommand('copy'); t.remove(); return ok; } catch (e) { return false; }
+  }
+  let toastT;
+  function toast(msg, err) { let t = document.getElementById('toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; t.setAttribute('role', 'status'); document.body.appendChild(t); } t.textContent = msg; t.className = 'toast' + (err ? ' err' : ''); t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 4200); }
+  document.addEventListener('click', async e => { const b = e.target.closest('[data-copy]'); if (!b) return; const ok = await copy(b.dataset.copy); toast(ok ? 'نُسخ الرابط. الصقه في رسالة.' : 'تعذّر النسخ. اضغط مطوّلاً على الرابط وانسخه.', !ok); });
+  /* pre-filled Microsoft Form URL within the ~8000-character limit; shortens the longest readable fields if needed */
+  function formsUrl(base, qmap, vals, keep, embed) {
+    vals = Object.assign({}, vals);
+    const build = () => { const fv = {}; Object.keys(qmap).forEach(k => { if (vals[k]) fv[qmap[k]] = String(vals[k]); }); return base + (embed ? '&embed=true' : '') + '&formValue=' + encodeURIComponent(JSON.stringify(fv)); };
+    let url = build(), trimmed = false, guard = 0;
+    while (url.length > 7800 && guard++ < 60) {
+      const k = Object.keys(vals).filter(x => !keep.includes(x) && vals[x] && vals[x].length > 12).sort((a, b) => vals[b].length - vals[a].length)[0];
+      if (!k) break;
+      vals[k] = vals[k].slice(0, Math.max(10, Math.floor(vals[k].length * 0.6))) + '…'; trimmed = true; url = build();
+    }
+    return { url, trimmed, vals };
+  }
+  return { esc, ICON_OUT, ICON_MAIL, ICON_WA, ICON_COPY, sendBlock, copy, toast, formsUrl, intlPhone };
+})();
 </script>
 <script>(() => {
 "use strict";
-const N = NMO;
+const N = NMO, CFG = window.NMO_CFG, esc = UI.esc;
 const $ = s => document.querySelector(s);
-const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const fromB64 = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; const bin = atob(s); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u; };
-async function unpack(d) {
-  const kind = d[0], bytes = fromB64(d.slice(1));
-  if (kind === 'z') { const ds = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')); return JSON.parse(await new Response(ds).text()); }
-  return JSON.parse(new TextDecoder().decode(bytes));
-}
 const groups = [['التحقق من البيانات', ['dataOk', 'dataFix', 'mapOk', 'mapUrl']], ['الوقف والمستندات', ['waqf', 'waqfBenef', ...N.DOCS.map(d => 'doc_' + d.k)]], ['الإشغال والتحصيل', ['vac', 'vacN', 'vacUnits', 'vacReason', 'off', 'offTypes', 'offUnits', 'offNote', 'arr', 'arrAmt', 'arrUnits', 'arrCourt']], ['الحالة والتشغيل', ['mnt', 'mntLevel', 'mntAreas', 'mntNote', 'meters', 'metersPayer', 'viol', 'violTypes', 'violNote']], ['الفرص الاستثمارية', ['opp', 'oppTypes', 'oppUnits', 'oppPlace', 'oppOther']], ['المرفقات والملاحظات', ['upl', 'notes']]];
+const DEC = { ok: 'اعتماد', back: 'إعادة', resend: 'إعادة إرسال' };
+const fmtDate = s => { const d = new Date(s); return isNaN(d) ? '' : d.toLocaleDateString('ar-SA-u-ca-gregory-nu-latn', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('ar-SA-u-nu-latn', { hour: '2-digit', minute: '2-digit' }); };
 
-function render(R) {
-  const P = R.prop || {}, A = Object.assign(N.blank(), R.A || {}), f = N.analyze(A, P), st = N.statusOf(f);
-  const d = new Date(R.at), ds = isNaN(d) ? '' : d.toLocaleDateString('ar-SA-u-ca-gregory-nu-latn', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('ar-SA-u-nu-latn', { hour: '2-digit', minute: '2-digit' });
+let R = null, D = '';                 // current report and its packed form
+let V = { step: 'decide', dec: '', note: '', ack: false, rec: null };   // approval panel state
+const flagKey = () => 'nmo-fwd-' + (R && R.ref) + '-' + ((R && R.chain) || []).length;
+
+function edited() { return R.pend && R.pend.edits ? R.pend.edits : []; }
+function stageWho(s) { return s === 0 ? { name: (R.sup && R.sup.name) || 'مشرف العقار', email: (R.sup && R.sup.email) || '', phone: R.sup && R.sup.phone, role: 'مشرف العقار' } : N.APPROVERS[s - 1]; }
+
+function chainHtml(s) {
+  const done = (R.chain || []).map(e => `<li class="${e.d === 'back' ? 'back' : 'done'}"><span class="dot">${e.d === 'back' ? '↩' : '✓'}</span><span><b>${esc(e.n)}</b><small>${DEC[e.d] || ''} · ${fmtDate(e.at)}</small>${e.note ? `<span class="note-q">${esc(e.note)}</span>` : ''}${e.edits && e.edits.length ? `<small>${e.edits.length === 1 ? 'تعديل واحد' : e.edits.length + ' تعديلات'} على الإجابات</small>` : ''}</span></li>`).join('');
+  const sup = `<li class="done"><span class="dot">✓</span><span><b>${esc((R.sup && R.sup.name) || 'مشرف العقار')}</b><small>مشرف العقار · أرسل التقرير · ${fmtDate(R.at)}</small></span></li>`;
+  const ahead = s > N.APPROVERS.length ? '' : (s === 0 ? `<li class="now"><span class="dot">!</span><span><b>${esc((R.sup && R.sup.name) || 'مشرف العقار')}</b><small>أُعيد إليه للاستكمال</small></span></li>` : N.APPROVERS.slice(s - 1).map((a, i) => `<li class="${i === 0 ? 'now' : ''}"><span class="dot">${a.stage}</span><span><b>${a.name}</b><small>${a.role}${i === 0 ? ' · بانتظار القرار' : ''}</small></span></li>`).join(''));
+  return `<ol class="chain">${sup}${done}${ahead}</ol>`;
+}
+
+function panel(s) {
+  const P = R.prop || {}, edits = edited();
+  const editLink = CFG.formUrl + '#edit=' + D;
+  const fwdFlag = (() => { try { return sessionStorage.getItem(flagKey()); } catch (e) { return null; } })();
+  if (fwdFlag) {                          // the person who just decided: send the report on
+    const f = JSON.parse(fwdFlag);
+    if (s > N.APPROVERS.length) return `<div class="panel"><h3>اعتُمد التقرير نهائياً</h3><p class="note">سُجّل اعتمادك في سجل الاعتمادات. التقرير مكتمل، ويمكنك مشاركة رابطه مع من يلزم.</p><button type="button" class="btn ghost" data-copy="${esc(location.href)}">${UI.ICON_COPY} نسخ رابط التقرير</button></div>`;
+    const to = stageWho(s);
+    const back = f.d === 'back';
+    return `<div class="panel"><h3>سُجّل قرارك</h3><p class="note">${back ? 'أعدت التقرير مع ملاحظتك.' : 'اعتمدت التقرير.'} الخطوة الأخيرة: أرسل الرابط إلى ${esc(to.name)}.</p>${UI.sendBlock({ title: (back ? 'أعِد التقرير إلى ' : 'أرسل التقرير إلى ') + to.name, to, subject: `${back ? 'إعادة' : 'اعتماد'} تقرير استلام ${P.code || ''} · ${P.name || ''}`, text: back ? `أعدت إليكم تقرير استلام ${P.name} (${P.code}) مع الملاحظة التالية: ${f.note}\nافتحوا الرابط للتعديل ثم أعيدوا الإرسال:` : `اعتمدتُ تقرير استلام ${P.name} (${P.code})، وهو الآن بانتظار اعتمادكم. افتحوا الرابط للمراجعة والاعتماد أو التعديل:`, link: location.href })}</div>`;
+  }
+  if (s > N.APPROVERS.length) return `<div class="panel"><h3>اعتُمد التقرير نهائياً</h3><p class="note">اكتملت سلسلة الاعتماد.</p></div>`;
+  const who = stageWho(s);
+  const pend = edits.length ? `<div><span class="lbl">تعديلات أجريتها على الإجابات <small>تُسجَّل مع قرارك</small></span><ul class="edits">${edits.map(x => `<li><b>${esc(x.l)}:</b> <span class="f">${esc(x.f || '—')}</span> ← <span class="t">${esc(x.t || '—')}</span></li>`).join('')}</ul></div>` : '';
+  if (V.step === 'record') return `<div class="panel"><h3>تسجيل القرار</h3><ol class="steps-note"><li>قرارك معبأ في الإطار أدناه.</li><li>انزل إلى أسفل الإطار واضغط <b>«إرسال»</b>.</li><li>حين تظهر رسالة «سُجّل قرارك» اضغط «تم التسجيل».</li></ol>
+    <div class="fbox"><iframe src="${esc(V.rec.embed)}" title="تسجيل القرار عبر Microsoft Forms"></iframe></div>
+    <p class="note">إن لم يظهر الإطار: <a class="linkbtn" href="${esc(V.rec.open)}" target="_blank" rel="noopener">افتح في نافذة مستقلة ${UI.ICON_OUT}</a></p>
+    <div class="send-row"><button type="button" class="btn" data-act="back-decide">رجوع</button><button type="button" class="btn pri" data-act="recorded">تم التسجيل ✓</button></div></div>`;
+  if (s === 0) {
+    const last = (R.chain || []).slice(-1)[0] || {};
+    return `<div class="panel"><span class="who">موجّه إلى ${esc(who.name)} · مشرف العقار</span><h3>أُعيد التقرير للاستكمال</h3>${last.note ? `<p class="note-q" style="margin:0">${esc(last.note)}</p>` : ''}${pend}
+      <a class="btn-link ghost" href="${esc(editLink)}">تعديل الإجابات</a>
+      <button type="button" class="ack" role="checkbox" aria-checked="${V.ack}" data-act="ack"><span class="box">${V.ack ? '✓' : ''}</span><span>أقر بأن الإجابات صحيحة بعد التعديل، وأعيد إرسالها بصفتي ${esc(who.name)}.</span></button>
+      <button type="button" class="btn pri" data-act="decide" data-dec="resend" ${V.ack ? '' : 'disabled'}>إعادة الإرسال إلى ${N.APPROVERS[0].name}</button></div>`;
+  }
+  return `<div class="panel"><span class="who">المرحلة ${s} من ${N.APPROVERS.length} · ${esc(who.role)}</span><h3>قرار ${esc(who.name)}</h3>${pend}
+    <div><span class="lbl">راجع التقرير أعلاه، ثم:</span><a class="btn-link ghost" href="${esc(editLink)}">تعديل الإجابات</a></div>
+    <div><span class="lbl">القرار</span><div class="seg" role="radiogroup"><button type="button" role="radio" aria-checked="${V.dec === 'ok'}" data-act="dec" data-dec="ok">اعتماد</button><button type="button" role="radio" aria-checked="${V.dec === 'back'}" data-act="dec" data-dec="back">إعادة مع ملاحظة</button></div></div>
+    <label class="fld" for="v-note"><span>${V.dec === 'back' ? 'سبب الإعادة' : 'ملاحظة'} <small class="cur">${V.dec === 'back' ? '· مطلوبة' : '· اختيارية'}</small></span><textarea id="v-note" rows="3" maxlength="300" placeholder="${V.dec === 'back' ? 'ما الذي يحتاج تعديلاً؟' : ''}">${esc(V.note)}</textarea></label>
+    <button type="button" class="ack" role="checkbox" aria-checked="${V.ack}" data-act="ack"><span class="box">${V.ack ? '✓' : ''}</span><span>أسجّل هذا القرار بصفتي ${esc(who.name)}.</span></button>
+    <button type="button" class="btn pri" data-act="decide" ${V.dec && V.ack ? '' : 'disabled'}>تسجيل القرار</button></div>`;
+}
+
+function render() {
+  const P = R.prop || {}, A = Object.assign(N.blank(), R.A || {}), f = N.analyze(A, P), st = N.statusOf(f), s = N.stageOf(R.chain);
+  const editedLabels = new Set(edited().map(x => x.l).concat(...(R.chain || []).map(e => (e.edits || []).map(x => x.l))));
   const teams = N.TEAMS.map(t => { const it = f.filter(x => x.team === t); return it.length ? `<div class="team"><h4>${t}</h4><div class="flags">${it.map(x => `<div class="flag ${x.lvl}"><span class="sv"></span><span>${esc(x.text)}</span><span class="team">${{ red: 'يوقف الاستلام', amber: 'متابعة', info: 'للعلم', opp: 'فرصة' }[x.lvl]}</span></div>`).join('')}</div></div>` : ''; }).join('');
   const secs = groups.map(([t, keys], i) => {
     const rows = keys.map(k => N.COLUMNS.find(c => c[0] === k)).filter(Boolean).map(c => [c[1], c[2](A, P)]).filter(r => r[1]);
-    return `<section class="rv-sec"><h3><span><span class="no">${String(i + 2).padStart(2, '0')}</span>${t}</span></h3>${rows.length ? `<dl class="dl">${rows.map(r => `<dt>${esc(r[0])}</dt><dd>${esc(r[1])}</dd>`).join('')}</dl>` : '<p class="empty">لا توجد إجابات.</p>'}</section>`;
+    return `<section class="rv-sec"><h3><span><span class="no">${String(i + 2).padStart(2, '0')}</span>${t}</span></h3>${rows.length ? `<dl class="dl">${rows.map(r => `<dt>${esc(r[0])}</dt><dd${editedLabels.has(r[0]) ? ' style="color:var(--acc)"' : ''}>${esc(r[1])}${editedLabels.has(r[0]) ? '<small>عُدّل أثناء الاعتماد</small>' : ''}</dd>`).join('')}</dl>` : '<p class="empty">لا توجد إجابات.</p>'}</section>`;
   }).join('');
   const map = P.lat ? `https://www.google.com/maps?q=${P.lat},${P.lng}` : '';
   document.title = 'تقرير استلام ' + (P.code || '');
@@ -582,23 +707,56 @@ function render(R) {
     <span class="eyebrow ltr" style="text-align:right">${esc(R.ref || '')}</span>
     <h1>${esc(P.name || 'عقار')}</h1>
     <p class="lede">${esc([P.code, P.type, P.district].filter(Boolean).join(' · '))}${map ? ` · <a class="linkbtn" href="${map}" target="_blank" rel="noopener">الموقع</a>` : ''}</p>
-    <div class="r-meta"><span class="pill ${st}">${N.STATUS[st]}</span><span class="muted">أعدّه ${esc(R.sup && R.sup.name || '—')} · <span class="ltr">${esc(R.sup && R.sup.phone || '')}</span>${R.sup && R.sup.email ? ' · <span class="ltr">' + esc(R.sup.email) + '</span>' : ''}</span><span class="muted num">${ds}</span></div>
+    <div class="r-meta"><span class="pill ${st}">${N.STATUS[st]}</span><span class="pill ${s > N.APPROVERS.length ? 'ready' : s === 0 ? 'notes' : 'wait'}">${esc(N.chainState(s))}</span><span class="muted">أعدّه ${esc((R.sup && R.sup.name) || '—')} · <span class="ltr">${esc((R.sup && R.sup.phone) || '')}</span></span></div>
   </div></header>
   <main class="r-in">
-    <section class="rv-sec"><h3><span><span class="no">01</span>ما يحتاج إجراء</span><span class="muted" style="font-size:13px;font-weight:400">محال تلقائياً حسب الجهة</span></h3>${teams ? `<div class="teams">${teams}</div>` : '<p class="empty">لا توجد ملاحظات. العقار جاهز للاستلام.</p>'}</section>
-    ${secs}
-    <section class="rv-sec"><h3><span><span class="no">08</span>سلسلة الاعتماد</span></h3>
-      <ol class="chain"><li class="done"><span class="dot">✓</span><span><b>${esc(R.sup && R.sup.name || 'مشرف العقار')}</b><small>مشرف العقار · أرسل التقرير</small></span></li>${N.APPROVERS.map((a, i) => `<li class="${i === 0 ? 'now' : ''}"><span class="dot">${i + 1}</span><span><b>${a.name}</b><small>${a.role}${i === 0 ? ' · بانتظار المراجعة' : ''}</small></span></li>`).join('')}</ol>
-    </section>
-    <p class="r-foot">نمو العقارية · المصدر: إجابات مشرف العقار عبر منصة استلام العقارات. هذا الرابط يحمل بيانات التقرير كاملة، فشاركه مع المعنيين فقط.</p>
+    <section class="rv-sec" id="approve"><h3><span><span class="no">01</span>الاعتماد</span><span class="muted" style="font-size:13px;font-weight:400">${esc(N.chainState(s))}</span></h3>${chainHtml(s)}${panel(s)}</section>
+    <section class="rv-sec"><h3><span><span class="no">02</span>ما يحتاج إجراء</span><span class="muted" style="font-size:13px;font-weight:400">محال تلقائياً حسب الجهة</span></h3>${teams ? `<div class="teams">${teams}</div>` : '<p class="empty">لا توجد ملاحظات. العقار جاهز للاستلام.</p>'}</section>
+    ${secs.replace(/<span class="no">(\d\d)<\/span>/g, (m, n) => `<span class="no">${String(+n + 1).padStart(2, '0')}</span>`)}
+    <p class="r-foot">نمو العقارية · المصدر: إجابات مشرف العقار عبر منصة استلام العقارات، وقرارات المعتمدين المسجلة في سجل الاعتمادات. هذا الرابط يحمل بيانات التقرير كاملة، فشاركه مع المعنيين فقط.</p>
   </main>`;
 }
+
+async function decide(decOverride) {
+  const s = N.stageOf(R.chain), who = stageWho(s), P = R.prop || {};
+  const d = decOverride || V.dec;
+  if (d === 'back' && !V.note.trim()) { UI.toast('اكتب سبب الإعادة.', true); const t = $('#v-note'); if (t) t.focus(); return; }
+  const entry = { s, n: who.name, d, note: V.note.trim(), at: new Date().toISOString(), edits: edited() };
+  const R2 = Object.assign({}, R, { chain: (R.chain || []).concat([entry]), pend: null });
+  const s2 = N.stageOf(R2.chain);
+  const link2 = CFG.reportUrl + '#d=' + await N.pack(R2);
+  const vals = { ref: R.ref, code: P.code || '', name: P.name || '', stage: s === 0 ? 'المشرف' : `${s} · ${who.name}`, approver: who.name, decision: DEC[d], note: entry.note, edits: entry.edits.map(x => `${x.l}: ${x.f || '—'} ← ${x.t || '—'}`).join(' | '), status: N.chainState(s2), next: N.holder(s2) || '—', link: link2 };
+  const base = CFG.formsBase + CFG.apprId;
+  const e = UI.formsUrl(base, CFG.aqmap, vals, ['ref', 'code', 'link', 'decision', 'stage', 'approver'], true);
+  const o = UI.formsUrl(base, CFG.aqmap, vals, ['ref', 'code', 'link', 'decision', 'stage', 'approver'], false);
+  V.rec = { embed: e.url, open: o.url, R2, link2, entry };
+  V.step = 'record'; render(); const el = $('#approve'); if (el) el.scrollIntoView({ block: 'start' });
+}
+
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-act]'); if (!b || !R) return;
+  const act = b.dataset.act;
+  if (act === 'dec') { V.dec = b.dataset.dec; render(); }
+  else if (act === 'ack') { V.ack = !V.ack; render(); }
+  else if (act === 'decide') { try { await decide(b.dataset.dec); } catch (err) { UI.toast('تعذّر تجهيز القرار. حاول مرة أخرى.', true); } }
+  else if (act === 'back-decide') { V.step = 'decide'; render(); }
+  else if (act === 'recorded') {
+    const r = V.rec; R = r.R2; D = r.link2.split('#d=')[1];
+    try { sessionStorage.setItem(flagKey(), JSON.stringify({ d: r.entry.d, note: r.entry.note })); } catch (err) { }
+    history.replaceState(null, '', '#d=' + D);
+    V = { step: 'decide', dec: '', note: '', ack: false, rec: null };
+    render(); const el = $('#approve'); if (el) el.scrollIntoView({ block: 'start' });
+  }
+});
+document.addEventListener('input', e => { if (e.target.id === 'v-note') V.note = e.target.value; });
+
 (async function boot() {
   const h = location.hash.replace(/^#/, ''); const m = h.match(/(?:^|&)d=([^&]+)/);
-  if (!m) { $('#app').innerHTML = `<main class="r-in center"><div class="c-brand"><span class="logo">${window.NMO_LOGO}</span></div><h1>لا يوجد تقرير في هذا الرابط</h1><p class="lede">افتح التقرير من عمود «رابط التقرير الكامل» في ملف Excel.</p></main>`; return; }
-  try { render(await unpack(decodeURIComponent(m[1]))); }
-  catch (e) { $('#app').innerHTML = `<main class="r-in center"><h1>تعذّر فتح التقرير</h1><p class="lede">الرابط ناقص أو تالف. انسخه كاملاً من ملف Excel ثم افتحه مرة أخرى.</p></main>`; }
+  if (!m) { $('#app').innerHTML = `<main class="r-in center"><div class="c-brand"><span class="logo">${window.NMO_LOGO}</span></div><h1>لا يوجد تقرير في هذا الرابط</h1><p class="lede">افتح التقرير من الرابط الذي وصلك، أو من عمود «رابط التقرير الكامل» في ملف Excel.</p></main>`; return; }
+  try { D = decodeURIComponent(m[1]); R = await N.unpack(D); R.chain = R.chain || []; render(); }
+  catch (e) { $('#app').innerHTML = `<main class="r-in center"><h1>تعذّر فتح التقرير</h1><p class="lede">الرابط ناقص أو تالف. انسخه كاملاً ثم افتحه مرة أخرى.</p></main>`; }
 })();
+window.addEventListener('hashchange', () => location.reload());
 })();
 </script>
 </body>
