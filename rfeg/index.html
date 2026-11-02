@@ -4,38 +4,338 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>رفيق RFEG · نمو العقارية</title>
+<title>رفيق RFEG · منصة التقييم العقاري والإيجاري</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22288.0%22%20height%3D%22288.0%22%20viewBox%3D%220%200%20288.0%20288.0%22%3E%3Cpath%20fill%3D%22%2333525C%22%20fill-rule%3D%22evenodd%22%20d%3D%22M288.00%2C216.00%20L288.00%2C0.00%20L72.00%2C0.00%20L0.00%2C72.00%20L0.00%2C288.00%20L216.00%2C288.00Z%22/%3E%3Cpath%20fill%3D%22%23F1F1F1%22%20fill-rule%3D%22evenodd%22%20d%3D%22M126.00%2C144.00%20L54.00%2C144.00%20L54.00%2C156.00%20L66.00%2C168.00%20L126.00%2C168.00%20L138.00%2C168.00%20L159.09%2C168.00%20L198.00%2C129.09%20L198.00%2C96.00%20L126.00%2C96.00Z%20M174.00%2C120.00%20L174.00%2C144.00%20L150.00%2C144.00%20L150.00%2C120.00Z%20M174.00%2C84.00%20L174.00%2C60.00%20L150.00%2C60.00%20L150.00%2C84.00Z%22/%3E%3Cpath%20fill%3D%22%23C8B691%22%20fill-rule%3D%22evenodd%22%20d%3D%22M222.00%2C96.00%20L210.00%2C96.00%20L210.00%2C134.06%20L116.06%2C228.00%20L150.00%2C228.00%20L234.00%2C144.00%20L234.00%2C108.00Z%22/%3E%3C/svg%3E"><link rel="apple-touch-icon" href="icon-180.png"><meta name="theme-color" content="#0A1820">
 <style>
-@font-face{font-family:"BW";font-weight:300;src:url(fonts/BW-300.woff2) format("woff2")}
-@font-face{font-family:"BW";font-weight:400;src:url(fonts/BW-400.woff2) format("woff2")}
-*{box-sizing:border-box}html,body{height:100%;margin:0}
-body{font:15px/1.8 "BW",Tahoma,sans-serif;color:#EEF0EE;background:#0B1A21 linear-gradient(180deg,#0A1820 0%,#10242C 30%,#1C343D 62%,#30484F 84%,#5E6560 95%,#8A7D66 100%) fixed;display:grid;place-items:center;padding:24px;-webkit-font-smoothing:antialiased}
-.g{width:min(440px,100%);display:grid;gap:26px;justify-items:center;text-align:center;animation:rise 1.2s cubic-bezier(.25,.6,.2,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}}
-.lock{margin:6px 0 4px;line-height:0}
-.lock svg{height:112px;width:auto;display:block}
-@media (max-width:420px){.lock svg{height:92px}}
-.tag{font-size:12px;color:#93A2A6;letter-spacing:.04em}
-p{margin:0;color:#C3CCCE;font-size:13.5px;max-width:34ch}
-form{display:grid;gap:12px;width:100%}
-input{width:100%;background:rgba(241,241,241,.07);border:1px solid rgba(241,241,241,.22);border-radius:999px;padding:13px 18px;font:inherit;color:#F1F1F1;text-align:center;letter-spacing:.12em;direction:ltr;font-size:16px}
-input:focus{outline:0;border-color:#EDE6DB}
-button{all:unset;cursor:pointer;background:#EDE6DB;color:#0B1A21;border-radius:999px;padding:12px 24px;font:inherit;font-size:14px}
-button:disabled{opacity:.5;cursor:default}
-.err{color:#DB9494;font-size:13px;min-height:1.6em}
-.ft{font-size:11.5px;color:#93A2A6}
+@font-face{font-family:"BW";font-weight:300;src:url(fonts/BW-300.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"BW";font-weight:400;src:url(fonts/BW-400.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"BW";font-weight:500;src:url(fonts/BW-500.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"ZS";font-weight:400;src:url(fonts/ZS-400.woff2) format("woff2");font-display:swap}
+:root{
+  --ob:#00131E;--teal:#1D3034;--steel:#33525C;--stone:#ACBDBE;--ice:#F1F1F1;--sand:#EDE6DB;--gold:#C8B691;
+  --ink:#EEF0EE;--ink2:#C3CCCE;--mute:#93A2A6;--line:rgba(241,241,241,.12);
+  --raise:rgba(12,28,36,.58);--shadow:0 30px 60px -32px rgba(0,0,0,.75),0 2px 0 rgba(241,241,241,.03) inset;
+  --gut:clamp(20px,4.4vw,64px);--ease:cubic-bezier(.22,.7,.16,1);--f:"BW",Tahoma,sans-serif;--fn:"ZS","BW",Tahoma,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+body{margin:0;font:15px/1.8 var(--f);color:var(--ink);background:#0B1A21;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,#0A1820 0%,#10242C 26%,#1C343D 56%,#30484F 80%,#5E6560 94%,#8A7D66 100%)}
+a{color:inherit;text-decoration:none}h1,h2,h3,p{margin:0}button{font:inherit;color:inherit}
+.n{font-family:var(--fn);direction:ltr;unicode-bidi:isolate;letter-spacing:.04em}
+.wrap{max-width:1260px;margin-inline:auto;padding-inline:var(--gut)}
+:focus-visible{outline:1px solid var(--sand);outline-offset:4px;border-radius:8px}
+
+/* ===== الدخول بالحركة ===== */
+#intro{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:linear-gradient(160deg,#0A1820 0%,#1C343D 58%,#5E6560 100%);transition:opacity .7s var(--ease),visibility .7s;cursor:pointer}
+#intro.done{opacity:0;visibility:hidden;pointer-events:none}
+#intro .stage{display:grid;justify-items:center;gap:26px}
+#intro .mark{display:flex;align-items:center;gap:clamp(10px,2.2vw,22px)}
+#intro .sym{width:min(26vw,128px);height:auto;overflow:visible}
+#intro .nm{display:block;line-height:0;clip-path:inset(0 0 0 100%);animation:wipe .8s var(--ease) 1.15s forwards}#intro .nm svg{height:min(26vw,128px);width:auto;display:block}
+#intro .o{transform-origin:center;opacity:0;transform:scale(.86);animation:oin .7s var(--ease) .35s forwards}
+#intro .f{opacity:0;transform:translate(46px,0);animation:fin .7s var(--ease) .65s forwards}
+#intro .r{opacity:0;transform:translate(-46px,46px);animation:rin .75s cubic-bezier(.3,1.35,.4,1) .8s forwards}
+#intro .tg{display:grid;justify-items:center;gap:4px;opacity:0;animation:fade .7s var(--ease) 1.75s forwards}
+#intro .tg b{font-weight:400;font-size:17px;color:var(--ink)}
+#intro .tg small{font-size:12.5px;color:var(--mute)}
+#intro .threads{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+#intro .threads line{stroke:rgba(172,189,190,.16);stroke-width:1;stroke-dasharray:1600;stroke-dashoffset:1600;animation:draw 1.4s var(--ease) forwards}
+#intro .skip{position:absolute;bottom:28px;font-size:12px;color:var(--mute)}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes oin{to{opacity:1;transform:none}}
+@keyframes fin{to{opacity:1;transform:none}}
+@keyframes rin{to{opacity:1;transform:none}}
+@keyframes wipe{to{clip-path:inset(0 0 0 0)}}
+@keyframes fade{to{opacity:1}}
+
+/* ===== الشريط العلوي ===== */
+.top{position:sticky;top:0;z-index:40;transition:background .35s,box-shadow .35s,backdrop-filter .35s}
+.top.sc{background:linear-gradient(180deg,rgba(10,24,32,.86),rgba(16,36,44,.72));backdrop-filter:blur(14px);box-shadow:0 10px 30px -20px rgba(0,0,0,.8)}
+.top .wrap{height:76px;display:flex;align-items:center;gap:34px}
+.top .lk svg{height:42px;width:auto;display:block}
+.top nav{display:flex;gap:26px;font-size:13.5px;color:var(--ink2)}
+.top nav a{position:relative;padding:6px 0;transition:color .2s}.top nav a:hover{color:var(--ink)}
+.top nav a::after{content:"";position:absolute;inset-inline:0;bottom:0;height:1px;background:var(--sand);transform:scaleX(0);transition:transform .3s var(--ease)}
+.top nav a:hover::after{transform:scaleX(1)}
+.top .sp{flex:1}
+.btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:12px 24px;font-size:14px;transition:transform .25s var(--ease),background .25s,box-shadow .25s}
+.btn.fill{background:var(--sand);color:#0B1A21;box-shadow:0 14px 30px -18px rgba(237,230,219,.55)}
+.btn.fill:hover{transform:translateY(-1px);background:#F5EFE6}
+.btn.ghost{background:rgba(241,241,241,.06);color:var(--ink);box-shadow:0 0 0 1px rgba(241,241,241,.16) inset}
+.btn.ghost:hover{background:rgba(241,241,241,.1)}
+.btn.sm{padding:9px 18px;font-size:13px}
+.btn .ar{font-family:var(--fn);transition:transform .25s var(--ease)}.btn:hover .ar{transform:translateX(-3px)}
+
+/* ===== البطل ===== */
+.hero{position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:center;gap:56px;min-height:calc(100svh - 76px);padding-block:40px 70px}
+.path{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;-webkit-mask-image:linear-gradient(270deg,transparent 0%,rgba(0,0,0,.25) 34%,#000 70%);mask-image:linear-gradient(270deg,transparent 0%,rgba(0,0,0,.25) 34%,#000 70%)}
+.path line{stroke:rgba(172,189,190,.075);stroke-width:1}
+.ey{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--mute)}
+.ey::before{content:"";width:42px;height:1px;background:rgba(172,189,190,.45)}
+.hero h1{font-weight:400;font-size:clamp(30px,3.6vw,52px);line-height:1.3;margin:22px 0 22px;letter-spacing:-.005em}
+.hero h1 em{font-style:normal;color:var(--sand);white-space:nowrap}
+.hero p.lead{font-size:clamp(15.5px,1.35vw,18px);color:var(--ink2);max-width:46ch;line-height:1.95}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.steps3{display:flex;gap:34px;flex-wrap:wrap;margin-top:46px;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink2)}
+.steps3 span{display:flex;gap:10px;align-items:baseline}.steps3 .n{color:var(--mute);font-size:12px}
+.fig{position:relative;display:grid;justify-items:center;gap:20px}
+.fig svg.sy{width:min(100%,460px);height:auto;overflow:visible;cursor:pointer;transition:transform .6s var(--ease);will-change:transform}
+.fig .cap{font-size:12.5px;color:var(--mute);text-align:center;max-width:36ch}
+.sy .grid line{stroke:rgba(172,189,190,.10);stroke-width:1;vector-effect:non-scaling-stroke}
+.sy .guide{stroke:rgba(200,182,145,.35);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}
+.sy .dim{stroke:rgba(172,189,190,.45);stroke-width:1;vector-effect:non-scaling-stroke}
+.sy text{font-family:var(--fn);font-size:11px;fill:var(--stone);letter-spacing:.06em}
+.sy .pf,.sy .pr{transition:transform .9s cubic-bezier(.3,1.45,.4,1)}
+.sy.apart .pr{transform:translate(18px,-18px)}.sy.apart .pf{transform:translate(-8px,8px)}
+.sy .po{filter:drop-shadow(0 26px 34px rgba(0,0,0,.45))}
+
+/* ===== الأقسام ===== */
+section.blk{padding-block:clamp(70px,10vw,120px)}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:34px}
+.sh .no{font-family:var(--fn);font-size:12px;color:var(--ink2);padding:3px 9px;border-radius:999px;background:rgba(241,241,241,.06)}
+.sh h2{font-weight:400;font-size:clamp(22px,2.4vw,30px)}
+.sh p{margin-inline-start:auto;font-size:13.5px;color:var(--mute);max-width:42ch}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{position:relative;overflow:hidden;border-radius:24px;background:var(--raise);box-shadow:var(--shadow);padding:30px 30px 26px;display:grid;gap:12px;align-content:start;min-height:290px;transition:transform .45s var(--ease),box-shadow .45s}
+.card:hover{transform:translateY(-4px);box-shadow:0 40px 70px -34px rgba(0,0,0,.85)}
+.card .k{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--mute)}.card .k::before{content:"";width:26px;height:1px;background:rgba(172,189,190,.45)}
+.card h3{font-weight:400;font-size:23px;line-height:1.35}
+.card p{font-size:14px;color:var(--ink2);line-height:1.9;max-width:34ch}
+.card .ft{margin-top:auto;padding-top:18px;font-size:12.5px;color:var(--stone);display:flex;align-items:center;gap:8px}
+.card .wm{position:absolute;inset-inline-end:-30px;bottom:-34px;width:150px;height:150px;pointer-events:none;fill:none;stroke:rgba(241,241,241,.09);stroke-width:2;transition:transform .6s var(--ease),stroke .4s}
+.card .wm .wr{stroke:rgba(200,182,145,.28)}
+.card:hover .wm{transform:translate(4px,-4px)}
+.flow{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px;border-radius:26px;background:var(--raise);box-shadow:var(--shadow);padding:40px 34px 34px}
+.flow::before{content:"";position:absolute;top:63px;inset-inline:calc(34px + 8%);height:1px;background:linear-gradient(90deg,transparent,rgba(172,189,190,.35) 12%,rgba(172,189,190,.35) 88%,transparent)}
+.st{position:relative;display:grid;gap:10px;justify-items:start}
+.st .dot{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:#16303A;box-shadow:0 0 0 1px rgba(241,241,241,.08) inset,0 10px 20px -12px rgba(0,0,0,.7);font-family:var(--fn);font-size:13px;color:var(--ink2);z-index:1}
+.st:last-child .dot{background:var(--steel);color:var(--ice)}
+.st b{font-weight:400;font-size:16px}.st small{font-size:12.5px;color:var(--mute);line-height:1.75}
+.src{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:center;border-radius:26px;background:var(--raise);box-shadow:var(--shadow);padding:34px 36px}
+.src .logos{display:flex;align-items:center;gap:30px;flex-wrap:wrap;direction:ltr;justify-content:flex-end}
+.src .logos img{height:34px;width:auto;display:block;opacity:.92}
+.src .logos .plate{background:#fff;border-radius:10px;padding:6px 10px;line-height:0}.src .logos .plate img{height:28px}
+.src .pst{display:flex;align-items:center;gap:8px}.src .pst img{height:30px}.src .pst img+img{height:24px;filter:brightness(0) invert(.93)}
+.src p{font-size:14px;color:var(--ink2);max-width:52ch;line-height:1.9}
+.src p small{display:block;margin-top:8px;font-size:12.5px;color:var(--mute)}
+.band{background:linear-gradient(90deg,rgba(10,24,32,.55),rgba(28,52,61,.35));box-shadow:0 1px 0 var(--line) inset,0 -1px 0 var(--line) inset}
+.band .wrap{display:flex;align-items:center;gap:28px;padding-block:44px;flex-wrap:wrap}
+.band .k{font-size:12px;color:var(--mute)}.band h3{font-weight:400;font-size:26px;margin:4px 0}.band p{font-size:13.5px;color:var(--ink2)}
+.band .sp{flex:1}
+footer.foot .wrap{display:flex;align-items:flex-end;gap:30px;padding-block:46px 40px;flex-wrap:wrap}
+footer.foot .me{display:grid;gap:10px}.footer-lk svg{height:34px;width:auto;display:block}
+footer.foot .me small{font-size:12px;color:var(--mute)}
+footer.foot .sp{flex:1}
+.from{display:flex;align-items:center;gap:14px;color:var(--ice)}.from small{font-size:12px;color:var(--mute)}.from svg{height:32px;width:auto;display:block}
+
+/* ===== نافذة الدخول ===== */
+.lg{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:20px;background:rgba(4,12,17,.62);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility .35s}
+.lg.on{opacity:1;visibility:visible}
+.lg .box{position:relative;width:min(440px,100%);border-radius:28px;background:linear-gradient(170deg,#12282F,#1C343D 70%,#2A4248);box-shadow:0 50px 90px -40px rgba(0,0,0,.9),0 0 0 1px rgba(241,241,241,.06) inset;padding:40px 34px 30px;display:grid;gap:18px;justify-items:center;text-align:center;transform:translateY(14px) scale(.98);transition:transform .45s var(--ease)}
+.lg.on .box{transform:none}
+.lg .box .lk svg{height:64px;width:auto;display:block}
+.lg h3{font-weight:400;font-size:19px}.lg p{font-size:13.5px;color:var(--ink2)}
+.lg form{display:grid;gap:12px;width:100%;margin-top:4px}
+.lg input{width:100%;background:rgba(241,241,241,.07);border:0;box-shadow:0 0 0 1px rgba(241,241,241,.16) inset;border-radius:999px;padding:14px 18px;font:inherit;color:var(--ice);text-align:center;letter-spacing:.12em;direction:ltr;font-size:16px;outline:0;transition:box-shadow .2s}
+.lg input:focus{box-shadow:0 0 0 1px var(--sand) inset}
+.lg .btn{justify-content:center;width:100%}
+.lg .btn:disabled{opacity:.55;cursor:default}
+.lg .err{color:#DB9494;font-size:13px;min-height:1.6em}
+.lg .note{font-size:11.5px;color:var(--mute)}
+.lg .x{position:absolute;top:14px;inset-inline-start:14px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(241,241,241,.06);border:0;cursor:pointer;color:var(--ink2)}
+.lg .x:hover{background:rgba(241,241,241,.12)}
+
+/* ===== الجوال ===== */
+@media (max-width:980px){
+  .top nav{display:none}
+  .hero .wrap{grid-template-columns:1fr;min-height:auto;padding-block:26px 60px;gap:40px}
+  .fig svg.sy{width:min(76vw,330px)}
+  .cards{grid-template-columns:1fr}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}.flow::before{display:none}
+  .src{grid-template-columns:1fr}.src .logos{justify-content:flex-start;direction:rtl}
+  .sh{flex-wrap:wrap}.sh p{margin-inline-start:0;flex-basis:100%}
+}
+@media (max-width:520px){
+  .top .wrap{height:64px;gap:14px}.top .lk svg{height:34px}
+  .steps3{gap:14px 22px}
+  .card{min-height:0;padding:26px 24px 22px}
+  .flow{grid-template-columns:1fr;padding:28px 22px;row-gap:20px}
+  .st{grid-template-columns:46px minmax(0,1fr);column-gap:16px;row-gap:2px;align-items:center}.st .dot{grid-row:span 2;align-self:start}
+  .hero .acts .btn{flex:1 1 auto;justify-content:center}
+  .src{padding:28px 24px}.src .logos{gap:20px}
+}
 </style>
 </head>
 <body>
-<div class="g">
-  <div class="lock"><svg role="img" aria-label="رفيق RFEG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 672.3 288.0"><path fill="#F1F1F1" fill-rule="evenodd" d="M192.34,120.00 L168.34,120.00 L168.34,144.00 L192.34,144.00Z M12.00,108.00 L96.34,108.00 L108.34,108.00 L144.34,108.00 L168.34,108.00 L192.34,108.00 L216.34,108.00 L240.34,108.00 L264.34,108.00 L312.34,108.00 L312.34,36.00 L240.34,36.00 L240.34,84.00 L216.34,84.00 L216.34,60.00 L192.34,60.00 L192.34,84.00 L168.34,84.00 L168.34,36.00 L96.34,36.00 L96.34,84.00 L0.00,84.00 L0.00,96.00Z M144.34,60.00 L144.34,84.00 L120.34,84.00 L120.34,60.00Z M288.34,60.00 L288.34,84.00 L264.34,84.00 L264.34,60.00Z M120.34,24.00 L120.34,0.00 L96.34,0.00 L96.34,24.00Z M168.34,0.00 L144.34,0.00 L144.34,24.00 L168.34,24.00Z M240.34,144.00 L240.34,120.00 L216.34,120.00 L216.34,144.00Z M278.40,156.00 L312.34,156.00 L360.34,108.00 L360.34,72.00 L348.34,60.00 L336.34,60.00 L336.34,98.06Z"/><path fill="#C8B691" fill-rule="evenodd" d="M288.34,24.00 L288.34,0.00 L264.34,0.00 L264.34,24.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M24.00,288.00 L24.00,261.60 L50.40,288.00 L84.34,288.00 L48.34,252.00 L72.00,252.00 L72.00,228.00 L72.00,216.00 L72.00,192.00 L48.00,192.00 L24.00,192.00 L12.00,192.00 L0.00,204.00 L0.00,216.00 L0.00,228.00 L0.00,252.00 L0.00,288.00Z M24.00,228.00 L24.00,216.00 L48.00,216.00 L48.00,228.00Z M96.34,252.00 L96.34,288.00 L120.34,288.00 L120.34,252.00 L156.34,252.00 L156.34,228.00 L120.34,228.00 L120.34,216.00 L168.34,216.00 L168.34,192.00 L120.34,192.00 L96.34,192.00 L96.34,216.00 L96.34,228.00Z M204.34,288.00 L252.34,288.00 L252.34,264.00 L204.34,264.00 L204.34,216.00 L252.34,216.00 L252.34,192.00 L204.34,192.00 L180.34,192.00 L180.34,216.00 L180.34,264.00 L180.34,288.00Z M276.34,264.00 L276.34,288.00 L300.34,288.00 L336.34,288.00 L348.34,288.00 L360.34,276.00 L360.34,264.00 L360.34,252.00 L360.34,228.00 L336.34,228.00 L312.34,228.00 L312.34,252.00 L336.34,252.00 L336.34,264.00 L300.34,264.00 L300.34,216.00 L360.34,216.00 L360.34,192.00 L300.34,192.00 L276.34,192.00 L276.34,216.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M252.34,252.00 L252.34,228.00 L216.34,228.00 L216.34,252.00Z"/><path fill="#33525C" fill-rule="evenodd" d="M672.34,216.00 L672.34,0.00 L456.34,0.00 L384.34,72.00 L384.34,288.00 L600.34,288.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M510.34,144.00 L438.34,144.00 L438.34,156.00 L450.34,168.00 L510.34,168.00 L522.34,168.00 L543.43,168.00 L582.34,129.09 L582.34,96.00 L510.34,96.00Z M558.34,120.00 L558.34,144.00 L534.34,144.00 L534.34,120.00Z M558.34,84.00 L558.34,60.00 L534.34,60.00 L534.34,84.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M606.34,96.00 L594.34,96.00 L594.34,134.06 L500.40,228.00 L534.34,228.00 L618.34,144.00 L618.34,108.00Z"/></svg></div>
-  <div class="tag">منصة التقييم العقاري والإيجاري · منتج تابع لشركة نمو العقارية</div>
-  <p>أدخل رمز الدخول لفك تشفير المنصة على جهازك.</p>
-  <form id="f"><input id="code" placeholder="رمز الدخول" autocomplete="current-password" type="password" required><button id="go">دخول</button><div class="err" id="err"></div></form>
-  <div class="ft">المحتوى مشفّر ولا يُفك إلا بالرمز · نمو العقارية © 2026</div>
+<div id="intro" aria-hidden="true">
+  <svg class="threads" id="threads" preserveAspectRatio="none"></svg>
+  <div class="stage">
+    <div class="mark">
+      <svg class="sym" viewBox="0 0 288 288"><path class="o" fill="#33525C" d="M288.00,216.00 L288.00,0.00 L72.00,0.00 L0.00,72.00 L0.00,288.00 L216.00,288.00Z"/><path class="f" fill="#F1F1F1" fill-rule="evenodd" d="M126.00,144.00 L54.00,144.00 L54.00,156.00 L66.00,168.00 L126.00,168.00 L138.00,168.00 L159.09,168.00 L198.00,129.09 L198.00,96.00 L126.00,96.00Z M174.00,120.00 L174.00,144.00 L150.00,144.00 L150.00,120.00Z M174.00,84.00 L174.00,60.00 L150.00,60.00 L150.00,84.00Z"/><path class="r" fill="#C8B691" d="M222.00,96.00 L210.00,96.00 L210.00,134.06 L116.06,228.00 L150.00,228.00 L234.00,144.00 L234.00,108.00Z"/></svg>
+      <span class="nm"><svg role="img" aria-label="رفيق RFEG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360.3 288.0"><path fill="#F1F1F1" fill-rule="evenodd" d="M192.34,120.00 L168.34,120.00 L168.34,144.00 L192.34,144.00Z M12.00,108.00 L96.34,108.00 L108.34,108.00 L144.34,108.00 L168.34,108.00 L192.34,108.00 L216.34,108.00 L240.34,108.00 L264.34,108.00 L312.34,108.00 L312.34,36.00 L240.34,36.00 L240.34,84.00 L216.34,84.00 L216.34,60.00 L192.34,60.00 L192.34,84.00 L168.34,84.00 L168.34,36.00 L96.34,36.00 L96.34,84.00 L0.00,84.00 L0.00,96.00Z M144.34,60.00 L144.34,84.00 L120.34,84.00 L120.34,60.00Z M288.34,60.00 L288.34,84.00 L264.34,84.00 L264.34,60.00Z M120.34,24.00 L120.34,0.00 L96.34,0.00 L96.34,24.00Z M168.34,0.00 L144.34,0.00 L144.34,24.00 L168.34,24.00Z M240.34,144.00 L240.34,120.00 L216.34,120.00 L216.34,144.00Z M278.40,156.00 L312.34,156.00 L360.34,108.00 L360.34,72.00 L348.34,60.00 L336.34,60.00 L336.34,98.06Z"/><path fill="#C8B691" fill-rule="evenodd" d="M288.34,24.00 L288.34,0.00 L264.34,0.00 L264.34,24.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M24.00,288.00 L24.00,261.60 L50.40,288.00 L84.34,288.00 L48.34,252.00 L72.00,252.00 L72.00,228.00 L72.00,216.00 L72.00,192.00 L48.00,192.00 L24.00,192.00 L12.00,192.00 L0.00,204.00 L0.00,216.00 L0.00,228.00 L0.00,252.00 L0.00,288.00Z M24.00,228.00 L24.00,216.00 L48.00,216.00 L48.00,228.00Z M96.34,252.00 L96.34,288.00 L120.34,288.00 L120.34,252.00 L156.34,252.00 L156.34,228.00 L120.34,228.00 L120.34,216.00 L168.34,216.00 L168.34,192.00 L120.34,192.00 L96.34,192.00 L96.34,216.00 L96.34,228.00Z M204.34,288.00 L252.34,288.00 L252.34,264.00 L204.34,264.00 L204.34,216.00 L252.34,216.00 L252.34,192.00 L204.34,192.00 L180.34,192.00 L180.34,216.00 L180.34,264.00 L180.34,288.00Z M276.34,264.00 L276.34,288.00 L300.34,288.00 L336.34,288.00 L348.34,288.00 L360.34,276.00 L360.34,264.00 L360.34,252.00 L360.34,228.00 L336.34,228.00 L312.34,228.00 L312.34,252.00 L336.34,252.00 L336.34,264.00 L300.34,264.00 L300.34,216.00 L360.34,216.00 L360.34,192.00 L300.34,192.00 L276.34,192.00 L276.34,216.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M252.34,252.00 L252.34,228.00 L216.34,228.00 L216.34,252.00Z"/></svg></span>
+    </div>
+    <div class="tg"><b>منصة التقييم العقاري والإيجاري</b><small>من نمو العقارية</small></div>
+  </div>
+  <span class="skip">اضغط للمتابعة</span>
 </div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="lk" href="#" aria-label="رفيق RFEG" onclick="scrollTo({top:0});return false"><svg role="img" aria-label="رفيق RFEG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 672.3 288.0"><path fill="#F1F1F1" fill-rule="evenodd" d="M192.34,120.00 L168.34,120.00 L168.34,144.00 L192.34,144.00Z M12.00,108.00 L96.34,108.00 L108.34,108.00 L144.34,108.00 L168.34,108.00 L192.34,108.00 L216.34,108.00 L240.34,108.00 L264.34,108.00 L312.34,108.00 L312.34,36.00 L240.34,36.00 L240.34,84.00 L216.34,84.00 L216.34,60.00 L192.34,60.00 L192.34,84.00 L168.34,84.00 L168.34,36.00 L96.34,36.00 L96.34,84.00 L0.00,84.00 L0.00,96.00Z M144.34,60.00 L144.34,84.00 L120.34,84.00 L120.34,60.00Z M288.34,60.00 L288.34,84.00 L264.34,84.00 L264.34,60.00Z M120.34,24.00 L120.34,0.00 L96.34,0.00 L96.34,24.00Z M168.34,0.00 L144.34,0.00 L144.34,24.00 L168.34,24.00Z M240.34,144.00 L240.34,120.00 L216.34,120.00 L216.34,144.00Z M278.40,156.00 L312.34,156.00 L360.34,108.00 L360.34,72.00 L348.34,60.00 L336.34,60.00 L336.34,98.06Z"/><path fill="#C8B691" fill-rule="evenodd" d="M288.34,24.00 L288.34,0.00 L264.34,0.00 L264.34,24.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M24.00,288.00 L24.00,261.60 L50.40,288.00 L84.34,288.00 L48.34,252.00 L72.00,252.00 L72.00,228.00 L72.00,216.00 L72.00,192.00 L48.00,192.00 L24.00,192.00 L12.00,192.00 L0.00,204.00 L0.00,216.00 L0.00,228.00 L0.00,252.00 L0.00,288.00Z M24.00,228.00 L24.00,216.00 L48.00,216.00 L48.00,228.00Z M96.34,252.00 L96.34,288.00 L120.34,288.00 L120.34,252.00 L156.34,252.00 L156.34,228.00 L120.34,228.00 L120.34,216.00 L168.34,216.00 L168.34,192.00 L120.34,192.00 L96.34,192.00 L96.34,216.00 L96.34,228.00Z M204.34,288.00 L252.34,288.00 L252.34,264.00 L204.34,264.00 L204.34,216.00 L252.34,216.00 L252.34,192.00 L204.34,192.00 L180.34,192.00 L180.34,216.00 L180.34,264.00 L180.34,288.00Z M276.34,264.00 L276.34,288.00 L300.34,288.00 L336.34,288.00 L348.34,288.00 L360.34,276.00 L360.34,264.00 L360.34,252.00 L360.34,228.00 L336.34,228.00 L312.34,228.00 L312.34,252.00 L336.34,252.00 L336.34,264.00 L300.34,264.00 L300.34,216.00 L360.34,216.00 L360.34,192.00 L300.34,192.00 L276.34,192.00 L276.34,216.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M252.34,252.00 L252.34,228.00 L216.34,228.00 L216.34,252.00Z"/><path fill="#33525C" fill-rule="evenodd" d="M672.34,216.00 L672.34,0.00 L456.34,0.00 L384.34,72.00 L384.34,288.00 L600.34,288.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M510.34,144.00 L438.34,144.00 L438.34,156.00 L450.34,168.00 L510.34,168.00 L522.34,168.00 L543.43,168.00 L582.34,129.09 L582.34,96.00 L510.34,96.00Z M558.34,120.00 L558.34,144.00 L534.34,144.00 L534.34,120.00Z M558.34,84.00 L558.34,60.00 L534.34,60.00 L534.34,84.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M606.34,96.00 L594.34,96.00 L594.34,134.06 L500.40,228.00 L534.34,228.00 L618.34,144.00 L618.34,108.00Z"/></svg></a>
+    <nav aria-label="أقسام الصفحة"><a href="#platform">المنصة</a><a href="#how">كيف يعمل</a><a href="#sources">المصادر</a><a href="#identity">الهوية</a></nav>
+    <span class="sp"></span>
+    <button type="button" class="btn fill sm" data-login>الدخول <span class="ar">←</span></button>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="path" id="pathbg" aria-hidden="true"></svg>
+    <div class="wrap">
+      <div>
+        <span class="ey">منتج من نمو العقارية</span>
+        <h1>قيمة العقار اليوم،<br>بنطاقٍ <em>ودرجة ثقة</em></h1>
+        <p class="lead">رفيق يقدّر قيمة العقار وإيجاره من صفقات السجل العقاري وعقود إيجار ومؤشرات الأحياء، ثم يُخرج تقريرًا مصمَّمًا يعتمده مقيّم معتمد بتوقيعه.</p>
+        <div class="acts"><button type="button" class="btn fill" data-login>الدخول إلى المنصة <span class="ar">←</span></button><a class="btn ghost" href="#how">كيف يعمل</a></div>
+        <div class="steps3"><span><i class="n">01</i>التقدير الفوري</span><span><i class="n">02</i>التقييم الكامل</span><span><i class="n">03</i>التقرير المعتمد</span></div>
+      </div>
+      <div class="fig">
+        <svg class="sy" id="sy" viewBox="-66 -66 420 420" role="img" aria-label="رمز رفيق على شبكة بنائه">
+          <defs>
+            <linearGradient id="gO" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3D6170"/><stop offset="1" stop-color="#284450"/></linearGradient>
+            <linearGradient id="gF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C6D0D2"/></linearGradient>
+            <linearGradient id="gR" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D3B1"/><stop offset="1" stop-color="#A9946B"/></linearGradient>
+          </defs>
+          <g class="grid" id="sgrid"></g>
+          <circle class="guide" cx="144" cy="144" r="144" opacity=".55"/>
+          <circle class="guide" cx="162" cy="132" r="50.9"/>
+          <line class="guide" x1="104" y1="257" x2="257" y2="104"/>
+          <path class="po" fill="url(#gO)" d="M288.00,216.00 L288.00,0.00 L72.00,0.00 L0.00,72.00 L0.00,288.00 L216.00,288.00Z"/>
+          <path class="pf" fill="url(#gF)" fill-rule="evenodd" d="M126.00,144.00 L54.00,144.00 L54.00,156.00 L66.00,168.00 L126.00,168.00 L138.00,168.00 L159.09,168.00 L198.00,129.09 L198.00,96.00 L126.00,96.00Z M174.00,120.00 L174.00,144.00 L150.00,144.00 L150.00,120.00Z M174.00,84.00 L174.00,60.00 L150.00,60.00 L150.00,84.00Z"/>
+          <path class="pr" fill="url(#gR)" d="M222.00,96.00 L210.00,96.00 L210.00,134.06 L116.06,228.00 L150.00,228.00 L234.00,144.00 L234.00,108.00Z"/>
+          <line class="dim" x1="0" y1="-30" x2="288" y2="-30"/><line class="dim" x1="0" y1="-36" x2="0" y2="-24"/><line class="dim" x1="288" y1="-36" x2="288" y2="-24"/>
+          <text x="144" y="-40" text-anchor="middle">12u</text>
+          <line class="dim" x1="318" y1="0" x2="318" y2="288"/><line class="dim" x1="312" y1="0" x2="324" y2="0"/><line class="dim" x1="312" y1="288" x2="324" y2="288"/>
+          <text x="332" y="148">12u</text>
+          <text x="262" y="98">45°</text>
+          <line class="dim" x1="30" y1="144" x2="30" y2="168"/><line class="dim" x1="24" y1="144" x2="36" y2="144"/><line class="dim" x1="24" y1="168" x2="36" y2="168"/>
+          <text x="16" y="161" text-anchor="end">1u</text>
+        </svg>
+        <span class="cap">فاءٌ وراءٌ متشابكتان داخل حرف O من نمو. تمرّ الراء أمام الفاء بفجوة ½u، والحواف 0° و45° و90° فقط. المس الرمز ليتجدد التشابك.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="platform">
+    <div class="wrap">
+      <div class="sh"><span class="no">01</span><h2>أقسام المنصة</h2><p>كل قسم يقرأ من المحفظة نفسها ومن مرآة السوق، فتبقى الأرقام متسقة من الخريطة إلى التقرير.</p></div>
+      <div class="cards">
+        <article class="card"><span class="k">القسم الأول</span><h3>التقدير الفوري</h3><p>قيمة اليوم لكل عقار بنطاق أدنى وأعلى ودرجة ثقة من A إلى D، ولأي موقع على الخريطة الفضائية بنقرة.</p><span class="ft">مؤشر سعر متر الأرض لكل حي <span class="n">›</span></span><svg class="wm" viewBox="-4 -4 296 296" aria-hidden="true"><path d="M288.00,216.00 L288.00,0.00 L72.00,0.00 L0.00,72.00 L0.00,288.00 L216.00,288.00Z"/><path d="M126.00,144.00 L54.00,144.00 L54.00,156.00 L66.00,168.00 L126.00,168.00 L138.00,168.00 L159.09,168.00 L198.00,129.09 L198.00,96.00 L126.00,96.00Z M174.00,120.00 L174.00,144.00 L150.00,144.00 L150.00,120.00Z M174.00,84.00 L174.00,60.00 L150.00,60.00 L150.00,84.00Z"/><path class="wr" d="M222.00,96.00 L210.00,96.00 L210.00,134.06 L116.06,228.00 L150.00,228.00 L234.00,144.00 L234.00,108.00Z"/></svg></article>
+        <article class="card"><span class="k">القسم الثاني</span><h3>التقييم والتقارير</h3><p>معالج من ست خطوات: السوق للأرض، والتكلفة للمباني، والدخل مؤشرًا. ثم تقرير PDF مصمَّم يمر بقائمة جودة واعتماد المقيّم.</p><span class="ft">مسودة ← مراجعة ← معتمد <span class="n">›</span></span><svg class="wm" viewBox="-4 -4 296 296" aria-hidden="true"><path d="M288.00,216.00 L288.00,0.00 L72.00,0.00 L0.00,72.00 L0.00,288.00 L216.00,288.00Z"/><path d="M126.00,144.00 L54.00,144.00 L54.00,156.00 L66.00,168.00 L126.00,168.00 L138.00,168.00 L159.09,168.00 L198.00,129.09 L198.00,96.00 L126.00,96.00Z M174.00,120.00 L174.00,144.00 L150.00,144.00 L150.00,120.00Z M174.00,84.00 L174.00,60.00 L150.00,60.00 L150.00,84.00Z"/><path class="wr" d="M222.00,96.00 L210.00,96.00 L210.00,134.06 L116.06,228.00 L150.00,228.00 L234.00,144.00 L234.00,108.00Z"/></svg></article>
+        <article class="card"><span class="k">القسم الثالث</span><h3>المحفظة والإيجارات</h3><p>كل عقد مقابل مرجع السوق، وانتهاء العقود والتنبيهات، واستيراد محفظة أي جهة من ملف Excel في دقائق.</p><span class="ft">فرص رفع الإيجار عند التجديد <span class="n">›</span></span><svg class="wm" viewBox="-4 -4 296 296" aria-hidden="true"><path d="M288.00,216.00 L288.00,0.00 L72.00,0.00 L0.00,72.00 L0.00,288.00 L216.00,288.00Z"/><path d="M126.00,144.00 L54.00,144.00 L54.00,156.00 L66.00,168.00 L126.00,168.00 L138.00,168.00 L159.09,168.00 L198.00,129.09 L198.00,96.00 L126.00,96.00Z M174.00,120.00 L174.00,144.00 L150.00,144.00 L150.00,120.00Z M174.00,84.00 L174.00,60.00 L150.00,60.00 L150.00,84.00Z"/><path class="wr" d="M222.00,96.00 L210.00,96.00 L210.00,134.06 L116.06,228.00 L150.00,228.00 L234.00,144.00 L234.00,108.00Z"/></svg></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="how" style="padding-top:0">
+    <div class="wrap">
+      <div class="sh"><span class="no">02</span><h2>كيف يعمل رفيق</h2><p>من الصفقة المسجّلة إلى التقرير الموقّع، في مسار واحد يمكن تتبّع كل رقم فيه إلى مصدره.</p></div>
+      <div class="flow">
+        <div class="st"><span class="dot">01</span><b>المصادر</b><small>صفقات السجل العقاري، وعقود إيجار، ومؤشرات الأحياء</small></div>
+        <div class="st"><span class="dot">02</span><b>المرآة</b><small>قراءة دورية للأحياء والصفقات تُحفظ مع تاريخها</small></div>
+        <div class="st"><span class="dot">03</span><b>المحرك</b><small>السوق للأرض، والتكلفة للمباني، والدخل للتحقق</small></div>
+        <div class="st"><span class="dot">04</span><b>التقرير</b><small>PDF مصمَّم بهوية موحّدة، مطوّل أو مختصر</small></div>
+        <div class="st"><span class="dot">05</span><b>الجودة</b><small>قائمة من اثني عشر بندًا قبل الإرسال للمراجعة</small></div>
+        <div class="st"><span class="dot">06</span><b>الاعتماد</b><small>مقيّم معتمد يراجع ويوقّع، ويُحفظ رمز تحقق للتقرير</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" id="sources" style="padding-top:0">
+    <div class="wrap">
+      <div class="sh"><span class="no">03</span><h2>مصادر البيانات</h2></div>
+      <div class="src">
+        <p>يعتمد رفيق على المصادر الرسمية للصفقات والعقود، وعلى منصة بسيطة لقراءة السوق والأحياء.<small>بيانات بسيطة للاستخدام الداخلي والاسترشادي، وكل تقدير «داخلي» حتى يعتمده مقيّم معتمد.</small></p>
+        <div class="logos"><span class="plate"><img src="logos/moj.png" alt="وزارة العدل"></span><img src="logos/rer_light.png" alt="السجل العقاري"><img src="logos/ejar_light.png" alt="إيجار"><span class="pst"><img src="logos/paseetah-icon.svg" alt=""><img src="logos/paseetah-wordmark.svg" alt="بسيطة"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="identity">
+    <div class="wrap">
+      <div><span class="k">دليل الهوية</span><h3>هوية رفيق</h3><p>الرمز والتشابك، وبناء الاسم، والألوان، والخط، والمسار، وملفات الشعار للتنزيل.</p></div>
+      <span class="sp"></span>
+      <a class="btn ghost" href="https://claude.ai/artifact/JcQFustxxE7e12KzJmY32K" target="_blank" rel="noopener">افتح دليل الهوية البصرية <span class="ar">↗</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="me"><span class="footer-lk"><svg role="img" aria-label="رفيق RFEG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 672.3 288.0"><path fill="#F1F1F1" fill-rule="evenodd" d="M192.34,120.00 L168.34,120.00 L168.34,144.00 L192.34,144.00Z M12.00,108.00 L96.34,108.00 L108.34,108.00 L144.34,108.00 L168.34,108.00 L192.34,108.00 L216.34,108.00 L240.34,108.00 L264.34,108.00 L312.34,108.00 L312.34,36.00 L240.34,36.00 L240.34,84.00 L216.34,84.00 L216.34,60.00 L192.34,60.00 L192.34,84.00 L168.34,84.00 L168.34,36.00 L96.34,36.00 L96.34,84.00 L0.00,84.00 L0.00,96.00Z M144.34,60.00 L144.34,84.00 L120.34,84.00 L120.34,60.00Z M288.34,60.00 L288.34,84.00 L264.34,84.00 L264.34,60.00Z M120.34,24.00 L120.34,0.00 L96.34,0.00 L96.34,24.00Z M168.34,0.00 L144.34,0.00 L144.34,24.00 L168.34,24.00Z M240.34,144.00 L240.34,120.00 L216.34,120.00 L216.34,144.00Z M278.40,156.00 L312.34,156.00 L360.34,108.00 L360.34,72.00 L348.34,60.00 L336.34,60.00 L336.34,98.06Z"/><path fill="#C8B691" fill-rule="evenodd" d="M288.34,24.00 L288.34,0.00 L264.34,0.00 L264.34,24.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M24.00,288.00 L24.00,261.60 L50.40,288.00 L84.34,288.00 L48.34,252.00 L72.00,252.00 L72.00,228.00 L72.00,216.00 L72.00,192.00 L48.00,192.00 L24.00,192.00 L12.00,192.00 L0.00,204.00 L0.00,216.00 L0.00,228.00 L0.00,252.00 L0.00,288.00Z M24.00,228.00 L24.00,216.00 L48.00,216.00 L48.00,228.00Z M96.34,252.00 L96.34,288.00 L120.34,288.00 L120.34,252.00 L156.34,252.00 L156.34,228.00 L120.34,228.00 L120.34,216.00 L168.34,216.00 L168.34,192.00 L120.34,192.00 L96.34,192.00 L96.34,216.00 L96.34,228.00Z M204.34,288.00 L252.34,288.00 L252.34,264.00 L204.34,264.00 L204.34,216.00 L252.34,216.00 L252.34,192.00 L204.34,192.00 L180.34,192.00 L180.34,216.00 L180.34,264.00 L180.34,288.00Z M276.34,264.00 L276.34,288.00 L300.34,288.00 L336.34,288.00 L348.34,288.00 L360.34,276.00 L360.34,264.00 L360.34,252.00 L360.34,228.00 L336.34,228.00 L312.34,228.00 L312.34,252.00 L336.34,252.00 L336.34,264.00 L300.34,264.00 L300.34,216.00 L360.34,216.00 L360.34,192.00 L300.34,192.00 L276.34,192.00 L276.34,216.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M252.34,252.00 L252.34,228.00 L216.34,228.00 L216.34,252.00Z"/><path fill="#33525C" fill-rule="evenodd" d="M672.34,216.00 L672.34,0.00 L456.34,0.00 L384.34,72.00 L384.34,288.00 L600.34,288.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M510.34,144.00 L438.34,144.00 L438.34,156.00 L450.34,168.00 L510.34,168.00 L522.34,168.00 L543.43,168.00 L582.34,129.09 L582.34,96.00 L510.34,96.00Z M558.34,120.00 L558.34,144.00 L534.34,144.00 L534.34,120.00Z M558.34,84.00 L558.34,60.00 L534.34,60.00 L534.34,84.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M606.34,96.00 L594.34,96.00 L594.34,134.06 L500.40,228.00 L534.34,228.00 L618.34,144.00 L618.34,108.00Z"/></svg></span><small>منصة التقييم العقاري والإيجاري · © 2026</small></div>
+    <span class="sp"></span>
+    <div class="from"><small>من</small><svg xmlns="http://www.w3.org/2000/svg" viewBox="2.5 0 639.5 112" style="color:#F1F1F1" role="img" aria-label="نمو العقارية"><g fill="currentColor"><g><path d="M349.7958463999999 40.19249920000001V44.130688000000006H343.76800639999993Q343.4063359999999 47.54646400000001 341.9194687999999 49.4753728Q340.43260159999994 51.404281600000004 337.5191455999999 52.22808640000001Q334.6056895999999 53.05189120000001 329.6226751999999 53.05189120000001Q327.2517247999999 53.05189120000001 324.2578975999999 52.650035200000005Q321.2640703999999 52.24817920000001 318.5314495999999 51.56502400000001L317.7277375999999 47.425907200000005Q324.23780479999994 49.11370240000001 329.5021183999999 49.11370240000001Q333.3197503999999 49.11370240000001 335.4897727999999 48.65156800000001Q337.6597951999999 48.18943360000001 338.6644351999999 47.124515200000005Q339.6690751999999 46.05959680000001 339.8700031999999 44.130688000000006H330.1852735999999Q323.5546495999999 44.130688000000006 319.9781311999999 41.25741760000001Q316.4016127999999 38.38414720000001 316.4016127999999 33.039462400000005V32.999276800000004Q316.4016127999999 29.583500800000003 317.9487583999999 27.051808Q319.49590399999994 24.520115200000003 322.40935999999994 23.153804800000003Q325.32281599999993 21.7874944 329.2610047999999 21.7874944H343.60726399999993H343.8885631999999V40.19249920000001ZM339.9101887999999 40.19249920000001V25.6854976H328.4974783999999Q324.55928959999994 25.6854976 322.3490815999999 27.6344992Q320.1388735999999 29.583500800000003 320.1388735999999 32.999276800000004V33.039462400000005Q320.1388735999999 36.374867200000004 322.3691743999999 38.283683200000006Q324.5994751999999 40.19249920000001 328.4974783999999 40.19249920000001Z M357.43111039999997 44.130688000000006H348.99213439999994V40.19249920000001H357.43111039999997Z M365.0663744 44.130688000000006H356.62739839999995V40.19249920000001H365.0663744Z M372.7016384 44.130688000000006H364.26266239999995V40.19249920000001H372.7016384Z M380.33690239999993 44.130688000000006H371.8979263999999V40.19249920000001H380.33690239999993Z M387.97216639999994 44.130688000000006H379.5331903999999V40.19249920000001H387.97216639999994Z M395.60743039999994 44.130688000000006H387.1684543999999V40.19249920000001H395.60743039999994Z M403.24269439999995 44.130688000000006H394.8037183999999V40.19249920000001H403.24269439999995Z M410.87795839999995 44.130688000000006H402.43898239999993V40.19249920000001H410.87795839999995Z M418.51322239999996 44.130688000000006H410.07424639999994V40.19249920000001H418.51322239999996Z M426.14848639999997 44.130688000000006H417.70951039999994V40.19249920000001H426.14848639999997Z M433.7837504 44.130688000000006H425.34477439999995V40.19249920000001H433.7837504Z M472.36192639999996 40.19249920000001V44.130688000000006H464.9275904Q463.23979519999995 46.220339200000005 460.5272672 47.36562880000001Q457.81473919999996 48.51091840000001 454.43914879999994 48.51091840000001H450.38040319999993Q446.92444159999997 48.51091840000001 444.1516352 47.36562880000001Q441.37882879999995 46.220339200000005 439.61066239999997 44.130688000000006H432.98003839999996V40.19249920000001H437.5210112Q437.03878399999996 38.544889600000005 437.03878399999996 36.696352000000005V36.656166400000004Q437.03878399999996 33.039462400000005 438.70648639999996 30.286748800000005Q440.37418879999996 27.5340352 443.4082016 26.027075200000002Q446.44221439999995 24.520115200000003 450.38040319999993 24.520115200000003H454.43914879999994Q458.2969664 24.520115200000003 461.25060799999994 26.027075200000002Q464.20424959999997 27.5340352 465.8317664 30.266656000000005Q467.45928319999996 32.999276800000004 467.45928319999996 36.6159808V36.696352000000005Q467.45928319999996 38.544889600000005 466.97705599999995 40.19249920000001ZM463.48090879999995 36.5356096Q463.48090879999995 34.1244736 462.3557119999999 32.2960288Q461.23051519999996 30.467584000000002 459.18104959999994 29.462944000000004Q457.131584 28.458304000000005 454.43914879999994 28.458304000000005H450.38040319999993Q447.60759679999995 28.458304000000005 445.47776 29.462944000000004Q443.34792319999997 30.467584000000002 442.18254079999997 32.3161216Q441.01715839999997 34.1646592 441.01715839999997 36.5757952V36.6159808Q441.01715839999997 38.98693120000001 442.18254079999997 40.79528320000001Q443.34792319999997 42.60363520000001 445.47776 43.58818240000001Q447.60759679999995 44.57272960000001 450.38040319999993 44.57272960000001H454.43914879999994Q457.131584 44.57272960000001 459.18104959999994 43.58818240000001Q461.23051519999996 42.60363520000001 462.3557119999999 40.77519040000001Q463.48090879999995 38.94674560000001 463.48090879999995 36.5757952Z M480.92145919999996 44.130688000000006H471.55821439999994V40.19249920000001H476.94308479999995V21.7874944H480.92145919999996ZM476.62159999999994 14.353158400000002Q476.62159999999994 13.388704000000004 477.324848 12.765827200000004Q478.02809599999995 12.142950400000004 479.03273599999994 12.142950400000004Q479.9971903999999 12.142950400000004 480.6602527999999 12.765827200000004Q481.3233151999999 13.388704000000004 481.3233151999999 14.353158400000002Q481.3233151999999 15.357798400000004 480.6602527999999 15.960582400000003Q479.9971903999999 16.563366400000003 479.03273599999994 16.563366400000003Q478.02809599999995 16.563366400000003 477.324848 15.960582400000003Q476.62159999999994 15.357798400000004 476.62159999999994 14.353158400000002Z M36.16704000000001 41.357881600000006V44.130688000000006H27.085094400000006H16.234982400000003Q9.925843200000003 44.130688000000006 6.469881600000002 41.277510400000004Q3.0139200000000006 38.4243328 3.0139200000000006 33.2403904V33.2002048Q3.0139200000000006 29.7844288 4.5409728000000005 27.2929216Q6.068025600000001 24.801414400000002 8.901110400000002 23.455196800000003Q11.734195200000002 22.1089792 15.632198400000004 22.1089792H27.085094400000006V20.0996992H29.857900800000007V41.357881600000006ZM27.085094400000006 24.8817856H15.149971200000003Q10.689369600000003 24.8817856 8.177769600000001 27.091993600000002Q5.666169600000001 29.302201600000004 5.666169600000001 33.2002048V33.2403904Q5.666169600000001 37.058022400000006 8.177769600000001 39.207952000000006Q10.689369600000003 41.357881600000006 15.149971200000003 41.357881600000006H27.085094400000006ZM14.748115200000004 14.433529599999996Q14.748115200000004 13.670003199999996 15.290620800000005 13.147590399999995Q15.833126400000005 12.625177599999994 16.596652800000005 12.625177599999994Q17.360179200000005 12.625177599999994 17.902684800000003 13.147590399999995Q18.445190400000005 13.670003199999996 18.445190400000005 14.433529599999996Q18.445190400000005 15.197055999999996 17.902684800000003 15.719468799999996Q17.360179200000005 16.241881599999996 16.596652800000005 16.241881599999996Q15.833126400000005 16.241881599999996 15.290620800000005 15.719468799999996Q14.748115200000004 15.197055999999996 14.748115200000004 14.433529599999996ZM21.579667200000006 14.433529599999996Q21.579667200000006 13.670003199999996 22.12217280000001 13.147590399999995Q22.664678400000007 12.625177599999994 23.428204800000007 12.625177599999994Q24.191731200000007 12.625177599999994 24.734236800000005 13.147590399999995Q25.276742400000007 13.670003199999996 25.276742400000007 14.433529599999996Q25.276742400000007 15.197055999999996 24.734236800000005 15.719468799999996Q24.191731200000007 16.241881599999996 23.428204800000007 16.241881599999996Q22.664678400000007 16.241881599999996 22.12217280000001 15.719468799999996Q21.579667200000006 15.197055999999996 21.579667200000006 14.433529599999996Z M47.09752320000001 44.130688000000006H35.36332800000001V41.357881600000006H44.32471680000001V22.1089792H47.09752320000001ZM35.92592640000001 51.3239104Q35.92592640000001 50.560384000000006 36.46843200000001 50.0379712Q37.010937600000005 49.5155584 37.77446400000001 49.5155584Q38.537990400000005 49.5155584 39.08049600000001 50.0379712Q39.62300160000001 50.560384000000006 39.62300160000001 51.3239104Q39.62300160000001 52.087436800000006 39.08049600000001 52.609849600000004Q38.537990400000005 53.1322624 37.77446400000001 53.1322624Q37.010937600000005 53.1322624 36.46843200000001 52.609849600000004Q35.92592640000001 52.087436800000006 35.92592640000001 51.3239104ZM42.75747840000001 51.3239104Q42.75747840000001 50.560384000000006 43.29998400000001 50.0379712Q43.84248960000001 49.5155584 44.60601600000001 49.5155584Q45.36954240000001 49.5155584 45.91204800000001 50.0379712Q46.45455360000001 50.560384000000006 46.45455360000001 51.3239104Q46.45455360000001 52.087436800000006 45.91204800000001 52.609849600000004Q45.36954240000001 53.1322624 44.60601600000001 53.1322624Q43.84248960000001 53.1322624 43.29998400000001 52.609849600000004Q42.75747840000001 52.087436800000006 42.75747840000001 51.3239104Z M51.03571200000001 52.44910720000001 50.834784000000006 50.07815680000001Q53.36647680000001 50.43982720000001 55.25520000000001 50.43982720000001Q58.75134720000001 50.43982720000001 60.41904960000001 48.49082560000001Q62.08675200000001 46.541824000000005 62.08675200000001 42.40270720000001V22.1089792H64.85955840000001V42.40270720000001Q64.85955840000001 47.787577600000006 62.62925760000001 50.37954880000001Q60.39895680000001 52.97152000000001 55.77761280000001 52.97152000000001Q53.286105600000006 52.97152000000001 51.03571200000001 52.44910720000001Z M75.5891136 11.540166399999997V41.357881600000006H81.89825280000001V44.130688000000006H72.81630720000001V11.540166399999997Z M89.93537280000002 44.130688000000006H81.09454080000002V41.357881600000006H89.93537280000002Z M97.97249280000003 44.130688000000006H89.13166080000002V41.357881600000006H97.97249280000003Z M106.00961280000003 44.130688000000006H97.16878080000002V41.357881600000006H106.00961280000003Z M114.04673280000003 44.130688000000006H105.20590080000002V41.357881600000006H114.04673280000003Z M122.08385280000003 44.130688000000006H113.24302080000002V41.357881600000006H122.08385280000003Z M130.12097280000003 44.130688000000006H121.28014080000003V41.357881600000006H130.12097280000003Z M138.15809280000005 44.130688000000006H129.31726080000004V41.357881600000006H138.15809280000005Z M146.19521280000004 44.130688000000006H137.35438080000003V41.357881600000006H146.19521280000004Z M154.23233280000005 44.130688000000006H145.39150080000005V41.357881600000006H154.23233280000005Z M162.26945280000004 44.130688000000006H153.42862080000003V41.357881600000006H162.26945280000004Z M170.30657280000005 44.130688000000006H161.46574080000005V41.357881600000006H170.30657280000005Z M178.34369280000004 44.130688000000006H169.50286080000004V41.357881600000006H178.34369280000004Z M186.38081280000006 44.130688000000006H177.53998080000005V41.357881600000006H186.38081280000006Z M194.41793280000005 44.130688000000006H185.57710080000004V41.357881600000006H194.41793280000005Z M202.45505280000006 44.130688000000006H193.61422080000006V41.357881600000006H202.45505280000006Z M232.67462400000005 41.357881600000006H238.98376320000006V44.130688000000006H232.35313920000004H232.31295360000004H219.05170560000005H201.65134080000004V41.357881600000006H209.40716160000005Q207.63899520000004 39.95138560000001 206.73481920000006 37.901920000000004Q205.83064320000005 35.852454400000006 205.83064320000005 33.2403904V33.2002048Q205.83064320000005 29.7844288 207.35769600000003 27.2929216Q208.88474880000004 24.801414400000002 211.71783360000006 23.455196800000003Q214.55091840000006 22.1089792 218.44892160000003 22.1089792H232.67462400000005ZM229.90181760000004 41.357881600000006V24.8817856H217.96669440000005Q213.50609280000003 24.8817856 210.99449280000005 27.091993600000002Q208.48289280000003 29.302201600000004 208.48289280000003 33.2002048V33.2403904Q208.48289280000003 37.058022400000006 210.99449280000005 39.207952000000006Q213.50609280000003 41.357881600000006 217.96669440000005 41.357881600000006ZM216.88168320000005 14.9157568Q216.88168320000005 14.1522304 217.42418880000005 13.629817599999999Q217.96669440000005 13.107404799999998 218.73022080000004 13.107404799999998Q219.49374720000006 13.107404799999998 220.03625280000006 13.629817599999999Q220.57875840000005 14.1522304 220.57875840000005 14.9157568Q220.57875840000005 15.6792832 220.03625280000006 16.201696Q219.49374720000006 16.7241088 218.73022080000004 16.7241088Q217.96669440000005 16.7241088 217.42418880000005 16.201696Q216.88168320000005 15.6792832 216.88168320000005 14.9157568ZM223.71323520000004 14.9157568Q223.71323520000004 14.1522304 224.25574080000004 13.629817599999999Q224.79824640000004 13.107404799999998 225.56177280000006 13.107404799999998Q226.32529920000005 13.107404799999998 226.86780480000004 13.629817599999999Q227.41031040000004 14.1522304 227.41031040000004 14.9157568Q227.41031040000004 15.6792832 226.86780480000004 16.201696Q226.32529920000005 16.7241088 225.56177280000006 16.7241088Q224.79824640000004 16.7241088 224.25574080000004 16.201696Q223.71323520000004 15.6792832 223.71323520000004 14.9157568Z M267.7566528000001 41.357881600000006H278.0843520000001V44.130688000000006H238.18005120000007V41.357881600000006H247.66385280000006L241.43508480000006 26.248096000000004Q245.53401600000007 24.037888000000002 249.71331840000005 22.872505600000004Q253.89262080000006 21.7071232 257.75043840000006 21.7071232Q261.5278848000001 21.7071232 265.6870944000001 22.872505600000004Q269.8463040000001 24.037888000000002 274.0256064000001 26.2882816ZM250.43665920000007 41.357881600000006H264.9436608000001L270.81075840000005 27.8153344Q263.8586496000001 24.520115200000003 257.75043840000006 24.520115200000003Q251.60204160000006 24.520115200000003 244.73030400000007 27.775148800000004Z M282.7458816000001 41.357881600000006V11.540166399999997H285.51868800000005V44.130688000000006H277.28064000000006V41.357881600000006Z M297.05195520000007 44.130688000000006H294.2791488000001V11.540166399999997H297.05195520000007Z M32.501414399999994 96.89321600000001V67.28632960000002H36.595104V100.821504H30.392543999999997L6.574713599999999 70.67706240000001V100.821504H2.5223744V67.28632960000002H8.890336Z M63.26611199999999 97.38942080000001 77.82145279999999 67.28632960000002H84.85102079999999V100.821504H80.7986816V70.22220800000001L65.8711872 100.821504H60.61968639999999L45.69219199999999 70.18085760000001V100.821504H41.63985279999999V67.28632960000002H48.6694208Z M89.19281279999998 84.07459200000001V83.9918912Q89.19281279999998 78.8644416 91.69451199999999 74.95682880000001Q94.1962112 71.049216 98.80678079999998 68.8989952Q103.41735039999999 66.7487744 109.53720959999998 66.7487744Q115.65706879999999 66.7487744 120.24696319999998 68.8989952Q124.83685759999999 71.049216 127.33855679999999 74.95682880000001Q129.84025599999998 78.8644416 129.84025599999998 83.9918912V84.07459200000001Q129.84025599999998 89.2020416 127.33855679999999 93.10965440000001Q124.83685759999999 97.0172672 120.24696319999998 99.167488Q115.65706879999999 101.3177088 109.53720959999998 101.3177088Q103.41735039999999 101.3177088 98.80678079999998 99.167488Q94.1962112 97.0172672 91.69451199999999 93.10965440000001Q89.19281279999998 89.2020416 89.19281279999998 84.07459200000001ZM125.66386559999998 84.11594240000001V84.03324160000001Q125.66386559999998 79.9809024 123.67904639999998 76.94164800000001Q121.69422719999999 73.90239360000001 118.03471679999998 72.24837760000001Q114.3752064 70.59436160000001 109.53720959999998 70.59436160000001Q104.61651199999999 70.59436160000001 100.97767679999998 72.22770240000001Q97.3388416 73.86104320000001 95.37469759999999 76.90029760000002Q93.41055359999999 79.939552 93.41055359999999 84.03324160000001V84.11594240000001Q93.41055359999999 88.1269312 95.39537279999999 91.1455104Q97.380192 94.16408960000001 101.03970239999998 95.81810560000001Q104.69921279999998 97.47212160000001 109.53720959999998 97.47212160000001Q114.3752064 97.47212160000001 118.03471679999998 95.81810560000001Q121.69422719999999 94.16408960000001 123.67904639999998 91.1455104Q125.66386559999998 88.1269312 125.66386559999998 84.11594240000001Z M177.6826688 100.821504H174.3746368L164.94674559999999 87.0104704H164.11973759999998H147.04202239999998V100.821504H144.18884479999997V67.28632960000002H164.07838719999998Q169.45393919999998 67.28632960000002 172.63791999999998 69.8293792Q175.82190079999998 72.37242880000001 175.82190079999998 76.92097280000002V76.96232320000001Q175.82190079999998 80.6838592 173.71303039999998 83.2062336Q171.60415999999998 85.72860800000001 167.882624 86.59696640000001ZM163.8716352 84.3226944Q167.9653248 84.3226944 170.40499839999998 82.37922560000001Q172.84467199999997 80.43575680000001 172.84467199999997 77.00367360000001V76.96232320000001Q172.84467199999997 73.53024 170.42567359999998 71.75217280000001Q168.0066752 69.9741056 163.8716352 69.9741056H147.04202239999998V84.3226944Z M209.81192959999998 100.821504H181.56960639999997V67.28632960000002H209.646528V69.9741056H184.42278399999998V82.1311232H207.99251199999998V84.8188992H184.42278399999998V98.133728H209.81192959999998Z M250.45937279999998 100.821504H247.44079359999995L241.73443839999996 89.90499840000001H220.89383679999997L215.22883199999998 100.821504H212.21025279999998L229.57742079999997 67.28632960000002H232.92680319999997ZM240.45257599999997 87.4239744 231.27278719999998 69.808704 222.13434879999997 87.4239744Z M282.09242879999994 100.821504H253.85010559999995V67.28632960000002H256.7032832V98.133728H282.09242879999994Z M323.6495807999999 100.821504H295.4072575999999V67.28632960000002H323.4841791999999V69.9741056H298.26043519999996V82.1311232H321.83016319999996V84.8188992H298.26043519999996V98.133728H323.6495807999999Z M326.70951039999994 98.133728 328.07407359999996 95.6940544Q331.13400319999994 97.30672 334.3179839999999 97.9683264Q337.50196479999994 98.6299328 341.05809919999996 98.6299328Q346.929856 98.6299328 350.34126399999997 97.0172672Q353.75267199999996 95.4046016 353.75267199999996 92.2619712V92.17927040000001Q353.75267199999996 90.1944512 352.38810879999994 88.85056320000001Q351.0235455999999 87.5066752 348.35644479999996 86.57629120000001Q345.68934399999995 85.64590720000001 341.22350079999995 84.7361984Q336.55090559999996 83.8264896 333.57367679999993 82.6480032Q330.59644799999995 81.46951680000001 329.02513279999994 79.6707744Q327.4538175999999 77.872032 327.4538175999999 75.184256V75.1015552Q327.4538175999999 72.5378304 329.12850879999996 70.67706240000001Q330.80319999999995 68.8162944 333.92515519999995 67.8032096Q337.04711039999995 66.7901248 341.30620159999995 66.7901248Q345.31719039999996 66.7901248 349.18345279999994 67.61713280000001Q353.0497151999999 68.44414080000001 355.4066879999999 69.7673536L354.04212479999995 72.1243264Q351.93325439999995 70.9251648 348.35644479999996 70.18085760000001Q344.7796351999999 69.43655040000002 341.26485119999995 69.43655040000002Q336.2201023999999 69.43655040000002 333.3048991999999 70.9251648Q330.38969599999996 72.41377920000001 330.38969599999996 74.93615360000001V75.01885440000001Q330.38969599999996 76.67287040000001 331.48548159999996 77.87203200000002Q332.58126719999996 79.07119360000002 335.14499199999995 80.04292800000002Q337.70871679999993 81.0146624 342.17455999999993 81.92437120000001Q347.75686399999995 83.04083200000001 350.8994944 84.42607040000001Q354.04212479999995 85.8113088 355.38601279999995 87.65140160000001Q356.72990079999994 89.49149440000001 356.72990079999994 92.09656960000001V92.17927040000001Q356.72990079999994 96.6451136 352.6155359999999 98.960736Q348.50117119999993 101.2763584 341.22350079999995 101.2763584Q332.78801919999995 101.2763584 326.70951039999994 98.133728Z M376.7848448 100.821504H373.8903168V69.9741056H358.38391679999995V67.28632960000002H392.24989439999996V69.9741056H376.7848448Z M423.8002496 100.821504H420.7816704L415.0753152 89.90499840000001H394.23471359999996L388.5697088 100.821504H385.55112959999997L402.91829759999996 67.28632960000002H406.26768ZM413.79345279999995 87.4239744 404.61366399999997 69.808704 395.4752256 87.4239744Z M435.50241279999995 100.821504H432.60788479999997V69.9741056H417.1014847999999V67.28632960000002H450.96746239999993V69.9741056H435.50241279999995Z M482.68321919999994 100.821504H454.44089599999995V67.28632960000002H482.51781759999994V69.9741056H457.2940736V82.1311232H480.8638016V84.8188992H457.2940736V98.133728H482.68321919999994Z"/></g><g transform="translate(96.94,-131)"><path fill-rule="evenodd" d="M447,131 L545,131 L545,207 L519,243 L421,243 L421,167 Z M478,161 L502,161 L502,193 L488,213 L464,213 L464,181 Z"/></g></g></svg></div>
+  </div>
+</footer>
+
+<div class="lg" id="lg" role="dialog" aria-modal="true" aria-labelledby="lgt">
+  <div class="box">
+    <button type="button" class="x" id="lgx" aria-label="إغلاق"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <span class="lk"><svg role="img" aria-label="رفيق RFEG" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 672.3 288.0"><path fill="#F1F1F1" fill-rule="evenodd" d="M192.34,120.00 L168.34,120.00 L168.34,144.00 L192.34,144.00Z M12.00,108.00 L96.34,108.00 L108.34,108.00 L144.34,108.00 L168.34,108.00 L192.34,108.00 L216.34,108.00 L240.34,108.00 L264.34,108.00 L312.34,108.00 L312.34,36.00 L240.34,36.00 L240.34,84.00 L216.34,84.00 L216.34,60.00 L192.34,60.00 L192.34,84.00 L168.34,84.00 L168.34,36.00 L96.34,36.00 L96.34,84.00 L0.00,84.00 L0.00,96.00Z M144.34,60.00 L144.34,84.00 L120.34,84.00 L120.34,60.00Z M288.34,60.00 L288.34,84.00 L264.34,84.00 L264.34,60.00Z M120.34,24.00 L120.34,0.00 L96.34,0.00 L96.34,24.00Z M168.34,0.00 L144.34,0.00 L144.34,24.00 L168.34,24.00Z M240.34,144.00 L240.34,120.00 L216.34,120.00 L216.34,144.00Z M278.40,156.00 L312.34,156.00 L360.34,108.00 L360.34,72.00 L348.34,60.00 L336.34,60.00 L336.34,98.06Z"/><path fill="#C8B691" fill-rule="evenodd" d="M288.34,24.00 L288.34,0.00 L264.34,0.00 L264.34,24.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M24.00,288.00 L24.00,261.60 L50.40,288.00 L84.34,288.00 L48.34,252.00 L72.00,252.00 L72.00,228.00 L72.00,216.00 L72.00,192.00 L48.00,192.00 L24.00,192.00 L12.00,192.00 L0.00,204.00 L0.00,216.00 L0.00,228.00 L0.00,252.00 L0.00,288.00Z M24.00,228.00 L24.00,216.00 L48.00,216.00 L48.00,228.00Z M96.34,252.00 L96.34,288.00 L120.34,288.00 L120.34,252.00 L156.34,252.00 L156.34,228.00 L120.34,228.00 L120.34,216.00 L168.34,216.00 L168.34,192.00 L120.34,192.00 L96.34,192.00 L96.34,216.00 L96.34,228.00Z M204.34,288.00 L252.34,288.00 L252.34,264.00 L204.34,264.00 L204.34,216.00 L252.34,216.00 L252.34,192.00 L204.34,192.00 L180.34,192.00 L180.34,216.00 L180.34,264.00 L180.34,288.00Z M276.34,264.00 L276.34,288.00 L300.34,288.00 L336.34,288.00 L348.34,288.00 L360.34,276.00 L360.34,264.00 L360.34,252.00 L360.34,228.00 L336.34,228.00 L312.34,228.00 L312.34,252.00 L336.34,252.00 L336.34,264.00 L300.34,264.00 L300.34,216.00 L360.34,216.00 L360.34,192.00 L300.34,192.00 L276.34,192.00 L276.34,216.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M252.34,252.00 L252.34,228.00 L216.34,228.00 L216.34,252.00Z"/><path fill="#33525C" fill-rule="evenodd" d="M672.34,216.00 L672.34,0.00 L456.34,0.00 L384.34,72.00 L384.34,288.00 L600.34,288.00Z"/><path fill="#F1F1F1" fill-rule="evenodd" d="M510.34,144.00 L438.34,144.00 L438.34,156.00 L450.34,168.00 L510.34,168.00 L522.34,168.00 L543.43,168.00 L582.34,129.09 L582.34,96.00 L510.34,96.00Z M558.34,120.00 L558.34,144.00 L534.34,144.00 L534.34,120.00Z M558.34,84.00 L558.34,60.00 L534.34,60.00 L534.34,84.00Z"/><path fill="#C8B691" fill-rule="evenodd" d="M606.34,96.00 L594.34,96.00 L594.34,134.06 L500.40,228.00 L534.34,228.00 L618.34,144.00 L618.34,108.00Z"/></svg></span>
+    <h3 id="lgt">الدخول إلى رفيق</h3>
+    <p>أدخل رمز الدخول لفك تشفير المنصة على جهازك.</p>
+    <form id="f"><input id="code" placeholder="رمز الدخول" autocomplete="current-password" type="password" required><button class="btn fill" id="go">دخول</button><div class="err" id="err"></div></form>
+    <span class="note">المحتوى مشفّر ولا يُفك إلا بالرمز · نمو العقارية</span>
+  </div>
+</div>
+
 <script>
+/* ===== الحركة والتفاعل ===== */
+(function () {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intro = document.getElementById('intro');
+  let seen = false; try { seen = sessionStorage.getItem('rfeg.intro') === '1'; } catch (e) {}
+  const endIntro = () => { intro.classList.add('done'); try { sessionStorage.setItem('rfeg.intro', '1'); } catch (e) {} };
+  if (seen || RM) intro.classList.add('done');
+  else {
+    const t = document.getElementById('threads'); const W = innerWidth, H = innerHeight; t.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    let s = ''; for (let y = 40, i = 0; y < H; y += 32, i++) s += `<line x1="${W}" y1="${y}" x2="${W * (0.15 + 0.5 * ((i * 37) % 10) / 10)}" y2="${y}" style="animation-delay:${(i % 9) * 0.05}s"/>`;
+    for (let x = W, i = 0; x > W * 0.3; x -= 64, i++) s += `<line x1="${x}" y1="0" x2="${x - H}" y2="${H}" style="animation-delay:${0.15 + i * 0.04}s"/>`;
+    t.innerHTML = s; intro.addEventListener('click', endIntro); addEventListener('keydown', endIntro, {once: true}); setTimeout(endIntro, 2900);
+  }
+  /* المسار خلف البطل: أفقي كل 4u ومائل 45° كل 8u، والمائل يمر أمام الأفقي بفجوة، ويتفكك نحو اليسار */
+  const pb = document.getElementById('pathbg');
+  const drawPath = () => { const r = pb.getBoundingClientRect(), W = Math.ceil(r.width), H = Math.ceil(r.height), u = 8; pb.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280; let s = '';
+    const gap = u * 0.5 * 1.42; const diag = []; for (let c = -H; c < W; c += u * 8) diag.push(c);
+    for (let y = u * 4; y < H; y += u * 4) { let x0 = 0; const xs = diag.map(c => c + (H - y)).filter(x => x > 0 && x < W).sort((a, b) => a - b);
+      for (const x of xs) { if (x - gap > x0 && !(x < W * .35 && rnd() < (1 - x / (W * .35)) * .8)) s += `<line x1="${x0}" y1="${y}" x2="${x - gap}" y2="${y}"/>`; x0 = x + gap; }
+      if (x0 < W) s += `<line x1="${x0}" y1="${y}" x2="${W}" y2="${y}"/>`; }
+    diag.forEach(c => { if (c + H < W * .2 && rnd() < .6) return; s += `<line x1="${c + H}" y1="0" x2="${c}" y2="${H}"/>`; });
+    pb.innerHTML = s; };
+  drawPath(); let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(drawPath, 150); });
+  /* شبكة الرمز */
+  const g = document.getElementById('sgrid'); let gs = ''; for (let v = -48; v <= 336; v += 24) gs += `<line x1="${v}" y1="-48" x2="${v}" y2="336"/><line x1="-48" y1="${v}" x2="336" y2="${v}"/>`; g.innerHTML = gs;
+  /* الرمز يتفاعل مع المؤشر، واللمس يفك التشابك ثم يعيده */
+  const sy = document.getElementById('sy');
+  if (!RM) { sy.closest('.fig').addEventListener('pointermove', e => { const r = sy.getBoundingClientRect(); const dx = (e.clientX - r.left) / r.width - .5, dy = (e.clientY - r.top) / r.height - .5; sy.style.transform = `perspective(900px) rotateY(${dx * 9}deg) rotateX(${-dy * 9}deg)`; });
+    sy.closest('.fig').addEventListener('pointerleave', () => { sy.style.transform = ''; }); }
+  let tm; const re = () => { sy.classList.add('apart'); clearTimeout(tm); tm = setTimeout(() => sy.classList.remove('apart'), 650); };
+  sy.addEventListener('click', re); sy.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') re(); });
+  /* الشريط العلوي */
+  const top = document.getElementById('top'); const onS = () => top.classList.toggle('sc', scrollY > 10); onS(); addEventListener('scroll', onS, {passive: true});
+  /* نافذة الدخول */
+  const lg = document.getElementById('lg'); const open = () => { lg.classList.add('on'); setTimeout(() => document.getElementById('code').focus(), 60); }; const close = () => lg.classList.remove('on');
+  document.querySelectorAll('[data-login]').forEach(b => b.addEventListener('click', open));
+  document.getElementById('lgx').onclick = close; lg.addEventListener('click', e => { if (e.target === lg) close(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  if (location.hash === '#login') open();
+})();
+
+/* ===== فك التشفير والتشغيل ===== */
 const enc = new TextEncoder(), dec = new TextDecoder();
 const b64 = {to: u8 => btoa(String.fromCharCode(...u8)), from: s => Uint8Array.from(atob(s), c => c.charCodeAt(0))};
 async function deriveKey(code, salt) {
@@ -57,6 +357,7 @@ async function boot(key) {
   const im = JSON.parse(dec.decode(await decryptBuf(key, img))); const IMG = {};
   for (const k in im) IMG[k] = URL.createObjectURL(new Blob([b64.from(im[k])], {type: 'image/jpeg'}));
   window.RFEG_IMG = IMG;
+  if (location.hash === '#login') history.replaceState(null, '', location.pathname + location.search);
   document.open(); document.write(html); document.close();
 }
 async function tryCode(code) {
@@ -71,7 +372,7 @@ document.getElementById('f').onsubmit = async e => {
   try { const key = await tryCode(document.getElementById('code').value); b.textContent = 'جارٍ فك التشفير…'; await boot(key); }
   catch (err) { er.textContent = 'رمز الدخول غير صحيح'; b.disabled = false; b.textContent = 'دخول'; }
 };
-(async () => { try { const k = sessionStorage.getItem('rfeg.key'); if (k) { const key = await crypto.subtle.importKey('raw', b64.from(k), {name: 'AES-GCM'}, true, ['decrypt']); document.getElementById('go').textContent = 'جارٍ الفتح…'; await boot(key); } } catch (e) { try { sessionStorage.removeItem('rfeg.key'); } catch (x) {} document.getElementById('go').textContent = 'دخول'; } })();
+(async () => { try { const k = sessionStorage.getItem('rfeg.key'); if (k) { document.getElementById('intro').classList.add('done'); const key = await crypto.subtle.importKey('raw', b64.from(k), {name: 'AES-GCM'}, true, ['decrypt']); await boot(key); } } catch (e) { try { sessionStorage.removeItem('rfeg.key'); } catch (x) {} } })();
 </script>
 </body>
 </html>
