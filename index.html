@@ -384,7 +384,7 @@ html[dir=ltr] #bkv .nx{left:auto;right:0}html[dir=ltr] #bkv .nx:after{transform:
 .nsl table.ntb.dk{color:#F1F1F1}.nsl .ntb.dk th{color:#C8B691;border-bottom-color:#C8B691}.nsl .ntb.dk td{border-bottom-color:rgba(241,241,241,.16)}
 .lt{width:794px;min-height:1123px;background:#fff;position:relative;color:#1B2A2E;font:300 14px/2 HN,BW,sans-serif}
 .lt .lh-h{position:absolute;top:44px;inset-inline:64px;height:70px;display:flex}
-.lt .lh-h .lg{width:190px;height:50px}
+.lt .lh-h .lg{width:225px;height:46px}
 .lt .lh-c{padding:150px 64px 120px}
 .lt .lh-meta{text-align:end;font-size:12px;color:#7A8A8F;line-height:1.9}
 .lt .lh-to{margin-top:30px;font:400 14px/1.9 BW}
@@ -1379,8 +1379,8 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const today=(l)=>new Date().toLocaleDateString(l==='ar'?'ar-SA-u-ca-gregory-nu-latn':'en-GB',{day:'numeric',month:'long',year:'numeric'});
 const T={
- ar:{contents:'المحتويات',thanks:'شكراً لكم',date:'التاريخ',ref:'الرقم',subj:'الموضوع',foot:'نمو العقارية · شركة تابعة لنماء مكنون للاستثمار · الرياض، المملكة العربية السعودية · info@nmo.sa · nmo.sa',cont:' (تابع)'},
- en:{contents:'Contents',thanks:'Thank you',date:'Date',ref:'Ref.',subj:'Subject',foot:'NMO Real Estate · A Nama Maknoon company · Riyadh, Saudi Arabia · info@nmo.sa · nmo.sa',cont:' (cont.)'}};
+ ar:{contents:'المحتويات',thanks:'شكراً لكم',date:'التاريخ',ref:'الرقم',subj:'الموضوع',foot:'الرياض، المملكة العربية السعودية · info@nmo.sa · nmo.sa',cont:' (تابع)'},
+ en:{contents:'Contents',thanks:'Thank you',date:'Date',ref:'Ref.',subj:'Subject',foot:'Riyadh, Saudi Arabia · info@nmo.sa · nmo.sa',cont:' (cont.)'}};
 const DEF={
  ar:{letter:{ref:'NMO-2026-014',to:'سعادة المدير العام لشركة الأفق للتطوير\t\tالمحترم',subj:'طلب اجتماع تعريفي',
    body:'السلام عليكم ورحمة الله وبركاته، وبعد،\n\nيسرّنا في نمو العقارية أن نتقدّم إليكم بخالص التحية، ونتطلع إلى لقاء تعريفي نعرض فيه رؤيتنا في تطوير الأصول العقارية وإدارتها، ونبحث فيه فرص التعاون بين الجانبين.\n\nنقترح أن يكون الاجتماع خلال الأسبوعين القادمين في الموعد الذي يناسبكم، ويسعدنا التنسيق مع مكتبكم لترتيب ذلك.\n\nوتفضلوا بقبول فائق الاحترام والتقدير،',
@@ -1785,7 +1785,7 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&studio.classList.contains('f
 /* ---------- letter renderer ---------- */
 function letterHTML(print){const L=st.letter,ar=st.lang==='ar',t=T[st.lang];
  const paras=L.body.split(/\n/).map(x=>x.trim()?`<p>${esc(x)}</p>`:'<p class="gap"></p>').join('');
- const head=`<div class="lh-h"><div class="lg">${svgLogo('Horizontal_IconLeft',C.ob)}</div></div>`;
+ const head=`<div class="lh-h"><div class="lg">${svgLogo('Primary_O_Horizontal',C.ob)}</div></div>`;
  const foot=`<div class="lh-f"><span>${esc(t.foot)}</span><em>${'<i></i>'.repeat(5)}</em></div>`;
  const body=`<div class="lh-meta"><div>${t.date}: ${esc(L.date)}</div><div>${t.ref}: ${esc(L.ref)}</div></div>
 <div class="lh-to">${esc(L.to).replace(/\t+/g,'<span class="tb"></span>').replace(/\n/g,'<br>')}</div>
@@ -1824,7 +1824,7 @@ $('#stin').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)r
   st.letter.body=real.map(b=>(b.k==='li'?'• ':'')+b.t).join('\n\n')}
  $('#stfile').textContent=f.name;e.target.value='';fill()});
 async function toDocx(){const D=docx,L=st.letter,ar=st.lang==='ar',t=T[st.lang];
- const logo=await png('Horizontal_IconLeft',C.ob,760);
+ const logo=await png('Primary_O_Horizontal',C.ob,900);
  const fnt=n=>({ascii:n,hAnsi:n,cs:n,eastAsia:n});
  const R=(text,o={})=>new D.TextRun({text,font:fnt(o.f||FONT.b),size:o.sz||22,sizeComplexScript:o.sz||22,color:(o.c||C.ink).slice(1),bold:!!o.b,boldComplexScript:!!o.b,rightToLeft:ar});
  const Pp=(children,o={})=>new D.Paragraph(Object.assign({children,bidirectional:ar,alignment:o.al||D.AlignmentType.START,spacing:{after:o.after??160,line:o.line||360,before:o.before||0}},o.x||{}));
@@ -1833,7 +1833,7 @@ async function toDocx(){const D=docx,L=st.letter,ar=st.lang==='ar',t=T[st.lang];
  const doc=new D.Document({creator:'NMO Real Estate',title:L.subj,
   styles:{default:{document:{run:{font:fnt(FONT.b),size:22,sizeComplexScript:22,rightToLeft:ar},paragraph:{bidirectional:ar}}}},
   sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:2300,bottom:1700,left:1300,right:1300,header:620,footer:560}}},
-   headers:{default:new D.Header({children:[Pp([new D.ImageRun({type:'png',data:b64bytes(logo.url),transformation:{width:190,height:Math.round(190*logo.h/logo.w)}})],{after:0})]})},
+   headers:{default:new D.Header({children:[Pp([new D.ImageRun({type:'png',data:b64bytes(logo.url),transformation:{width:225,height:Math.round(225*logo.h/logo.w)}})],{after:0})]})},
    footers:{default:new D.Footer({children:[Pp([R(t.foot,{sz:14,c:C.mut})],{al:D.AlignmentType.CENTER,after:0,line:276,x:{border:{top:{style:D.BorderStyle.SINGLE,size:6,color:C.steel.slice(1),space:8}}}})]})},
    children:[Pp([R(`${t.date}: ${L.date}`,{sz:18,c:C.mut})],{al:D.AlignmentType.END,after:20,line:276}),
     Pp([R(`${t.ref}: ${L.ref}`,{sz:18,c:C.mut})],{al:D.AlignmentType.END,after:360,line:276}),
@@ -1847,7 +1847,7 @@ function letterPages(){const L=st.letter,ar=st.lang==='ar',t=T[st.lang],W=794,H=
  const mc=document.createElement('canvas').getContext('2d');
  const nlines=(s,font,w)=>{mc.font=font;let n=0;String(s).split('\n').forEach(par=>{let cur='';const ws=par.split(/\s+/);if(!par.trim()){n++;return}ws.forEach(x=>{const tt=cur?cur+' '+x:x;if(mc.measureText(tt).width>w&&cur){n++;cur=x}else cur=tt});n++});return n};
  const pages=[];let P,y;
- const newPage=()=>{P=[];pages.push({bg:'#FFFFFF',P});y=TOP;const lw=50*ratio('Horizontal_IconLeft');P.push({t:'logo',k:'Horizontal_IconLeft',col:C.ob,x:ar?W-PX-lw:PX,y:44,w:lw,h:50});
+ const newPage=()=>{P=[];pages.push({bg:'#FFFFFF',P});y=TOP;const lw=46*ratio('Primary_O_Horizontal');P.push({t:'logo',k:'Primary_O_Horizontal',col:C.ob,x:ar?W-PX-lw:PX,y:46,w:lw,h:46});
   P.push({t:'rect',x:PX,y:H-62,w:CW,h:1,fill:C.steel});P.push({t:'txt',s:t.foot,x:PX+70,y:H-56,w:CW-70,h:30,f:'b',wt:300,sz:9,c:C.mut,al:'s',va:'m',lh:1.5});
   for(let i=0;i<5;i++)P.push({t:'rect',x:ar?PX+i*10:W-PX-50+i*10,y:H-46,w:6,h:6,fill:i<3?C.steel:C.stone})};
  const block=(s,font,sz,lh,o)=>{const n=nlines(s,font,CW),h=n*sz*lh;if(y+h>BOT&&y>TOP)newPage();P.push(Object.assign({t:'txt',s,x:PX,y,w:CW,h,sz,lh,c:C.ink,al:'s',va:'t'},o));y+=h};
